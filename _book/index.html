@@ -176,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#your-turn-2"><i class="fa fa-check"></i><b>4.3</b> Your turn</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="wrap-up.html"><a href="wrap-up.html"><i class="fa fa-check"></i><b>5</b> Wrap Up</a><ul>
-<li class="chapter" data-level="5.1" data-path="wrap-up.html"><a href="wrap-up.html#further-reading"><i class="fa fa-check"></i><b>5.1</b> Further Reading</a></li>
+<li class="chapter" data-level="5.1" data-path="wrap-up.html"><a href="wrap-up.html#learning-more"><i class="fa fa-check"></i><b>5.1</b> Learning more</a></li>
 <li class="chapter" data-level="5.2" data-path="wrap-up.html"><a href="wrap-up.html#references"><i class="fa fa-check"></i><b>5.2</b> References</a></li>
 </ul></li>
 <li class="divider"></li>
@@ -238,152 +238,36 @@ We will use this to create our maps along with other packages for handling spati
 ##  date     2019-11-01                  
 ## 
 ## ─ Packages ──────────────────────────────────────────────────────────────
-##  package            * version date       lib
-##  assertthat           0.2.1   2019-03-21 [1]
-##  backports            1.1.5   2019-10-02 [1]
-##  bookdown           * 0.14    2019-10-01 [1]
-##  broom                0.5.2   2019-04-07 [1]
-##  cellranger           1.1.0   2016-07-27 [1]
-##  class                7.3-15  2019-01-01 [2]
-##  classInt             0.4-2   2019-10-17 [1]
-##  cli                  1.1.0   2019-03-19 [1]
-##  colorspace           1.4-1   2019-03-18 [1]
-##  crayon               1.3.4   2017-09-16 [1]
-##  DBI                  1.0.0   2018-05-02 [1]
-##  digest               0.6.22  2019-10-21 [1]
-##  dplyr              * 0.8.3   2019-07-04 [1]
-##  e1071                1.7-2   2019-06-05 [1]
-##  ellipsis             0.3.0   2019-09-20 [1]
-##  evaluate             0.14    2019-05-28 [1]
-##  fansi                0.4.0   2018-10-05 [1]
-##  forcats            * 0.4.0   2019-02-17 [1]
-##  generics             0.0.2   2018-11-29 [1]
-##  ggplot2            * 3.2.1   2019-08-10 [1]
-##  glue                 1.3.1   2019-03-12 [1]
-##  gtable               0.3.0   2019-03-25 [1]
-##  haven                2.1.1   2019-07-04 [1]
-##  hms                  0.5.2   2019-10-30 [1]
-##  htmltools            0.4.0   2019-10-04 [1]
-##  httr                 1.4.1   2019-08-05 [1]
-##  jsonlite             1.6     2018-12-07 [1]
-##  KernSmooth           2.23-15 2015-06-29 [2]
-##  knitr                1.25    2019-09-18 [1]
-##  later                1.0.0   2019-10-04 [1]
-##  lattice              0.20-38 2018-11-04 [2]
-##  lazyeval             0.2.2   2019-03-15 [1]
-##  lifecycle            0.1.0   2019-08-01 [1]
-##  lubridate          * 1.7.4   2018-04-11 [1]
-##  magrittr             1.5     2014-11-22 [1]
-##  modelr               0.1.5   2019-08-08 [1]
-##  munsell              0.5.0   2018-06-12 [1]
-##  nlme                 3.1-140 2019-05-12 [2]
-##  pillar               1.4.2   2019-06-29 [1]
-##  pkgconfig            2.0.3   2019-09-22 [1]
-##  purrr              * 0.3.3   2019-10-18 [1]
-##  R6                   2.4.0   2019-02-14 [1]
-##  Rcpp                 1.0.2   2019-07-25 [1]
-##  readr              * 1.3.1   2018-12-21 [1]
-##  readxl               1.3.1   2019-03-13 [1]
-##  rgeos                0.5-2   2019-10-03 [1]
-##  rlang                0.4.1   2019-10-24 [1]
-##  rmarkdown            1.16    2019-10-01 [1]
-##  rnaturalearth      * 0.1.0   2017-03-21 [1]
-##  rnaturalearthhires   0.2.0   2019-11-01 [1]
-##  rsthemes             0.0.2   2019-10-31 [1]
-##  rstudioapi           0.10    2019-03-19 [1]
-##  rvest                0.3.4   2019-05-15 [1]
-##  scales               1.0.0   2018-08-09 [1]
-##  sessioninfo          1.1.1   2018-11-05 [1]
-##  sf                   0.8-0   2019-09-17 [1]
-##  sp                   1.3-1   2018-06-05 [1]
-##  stringi              1.4.3   2019-03-12 [1]
-##  stringr            * 1.4.0   2019-02-10 [1]
-##  tibble             * 2.1.3   2019-06-06 [1]
-##  tidyr              * 1.0.0   2019-09-11 [1]
-##  tidyselect           0.2.5   2018-10-11 [1]
-##  tidyverse          * 1.2.1   2017-11-14 [1]
-##  units                0.6-5   2019-10-08 [1]
-##  utf8                 1.1.4   2018-05-24 [1]
-##  vctrs                0.2.0   2019-07-05 [1]
-##  viridisLite          0.3.0   2018-02-01 [1]
-##  withr                2.1.2   2018-03-15 [1]
-##  xfun                 0.10    2019-10-01 [1]
-##  xml2                 1.2.2   2019-08-09 [1]
-##  yaml                 2.2.0   2018-07-25 [1]
-##  zeallot              0.1.0   2018-01-28 [1]
-##  source                             
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  local                              
-##  Github (gadenbuie/rsthemes@c787f3c)
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
-##  CRAN (R 3.6.1)                     
+##  package     * version date       lib source                             
+##  assertthat    0.2.1   2019-03-21 [1] CRAN (R 3.6.1)                     
+##  backports     1.1.5   2019-10-02 [1] CRAN (R 3.6.1)                     
+##  bookdown      0.14    2019-10-01 [1] CRAN (R 3.6.1)                     
+##  cli           1.1.0   2019-03-19 [1] CRAN (R 3.6.1)                     
+##  crayon        1.3.4   2017-09-16 [1] CRAN (R 3.6.1)                     
+##  digest        0.6.22  2019-10-21 [1] CRAN (R 3.6.1)                     
+##  evaluate      0.14    2019-05-28 [1] CRAN (R 3.6.1)                     
+##  hms           0.5.2   2019-10-30 [1] CRAN (R 3.6.1)                     
+##  htmltools     0.4.0   2019-10-04 [1] CRAN (R 3.6.1)                     
+##  knitr         1.25    2019-09-18 [1] CRAN (R 3.6.1)                     
+##  later         1.0.0   2019-10-04 [1] CRAN (R 3.6.1)                     
+##  magrittr      1.5     2014-11-22 [1] CRAN (R 3.6.1)                     
+##  pillar        1.4.2   2019-06-29 [1] CRAN (R 3.6.1)                     
+##  pkgconfig     2.0.3   2019-09-22 [1] CRAN (R 3.6.1)                     
+##  Rcpp          1.0.2   2019-07-25 [1] CRAN (R 3.6.1)                     
+##  rlang         0.4.1   2019-10-24 [1] CRAN (R 3.6.1)                     
+##  rmarkdown     1.16    2019-10-01 [1] CRAN (R 3.6.1)                     
+##  rsthemes      0.0.2   2019-10-31 [1] Github (gadenbuie/rsthemes@c787f3c)
+##  rstudioapi    0.10    2019-03-19 [1] CRAN (R 3.6.1)                     
+##  sessioninfo   1.1.1   2018-11-05 [1] CRAN (R 3.6.1)                     
+##  stringi       1.4.3   2019-03-12 [1] CRAN (R 3.6.1)                     
+##  stringr       1.4.0   2019-02-10 [1] CRAN (R 3.6.1)                     
+##  tibble        2.1.3   2019-06-06 [1] CRAN (R 3.6.1)                     
+##  tinytex       0.17    2019-10-30 [1] CRAN (R 3.6.1)                     
+##  vctrs         0.2.0   2019-07-05 [1] CRAN (R 3.6.1)                     
+##  withr         2.1.2   2018-03-15 [1] CRAN (R 3.6.1)                     
+##  xfun          0.10    2019-10-01 [1] CRAN (R 3.6.1)                     
+##  yaml          2.2.0   2018-07-25 [1] CRAN (R 3.6.1)                     
+##  zeallot       0.1.0   2018-01-28 [1] CRAN (R 3.6.1)                     
 ## 
 ## [1] /home/adam/.local/lib/R
 ## [2] /usr/lib/R/library</code></pre>

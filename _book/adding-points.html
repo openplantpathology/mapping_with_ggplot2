@@ -176,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#your-turn-2"><i class="fa fa-check"></i><b>4.3</b> Your turn</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="wrap-up.html"><a href="wrap-up.html"><i class="fa fa-check"></i><b>5</b> Wrap Up</a><ul>
-<li class="chapter" data-level="5.1" data-path="wrap-up.html"><a href="wrap-up.html#further-reading"><i class="fa fa-check"></i><b>5.1</b> Further Reading</a></li>
+<li class="chapter" data-level="5.1" data-path="wrap-up.html"><a href="wrap-up.html#learning-more"><i class="fa fa-check"></i><b>5.1</b> Learning more</a></li>
 <li class="chapter" data-level="5.2" data-path="wrap-up.html"><a href="wrap-up.html#references"><i class="fa fa-check"></i><b>5.2</b> References</a></li>
 </ul></li>
 <li class="divider"></li>
@@ -211,11 +211,11 @@ Using the soybean rust observation data, add the points to the map of Brazil.</p
 <div id="import-soybean-rust-observations" class="section level3">
 <h3><span class="header-section-number">3.2.1</span> Import Soybean Rust Observations</h3>
 <p>We will load the <em>tidyverse</em> package for these next steps.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="adding-points.html#cb16-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb16-2"><a href="adding-points.html#cb16-2"></a></span>
-<span id="cb16-3"><a href="adding-points.html#cb16-3"></a>sbr &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;SBR-BR.csv&quot;</span>)</span>
-<span id="cb16-4"><a href="adding-points.html#cb16-4"></a></span>
-<span id="cb16-5"><a href="adding-points.html#cb16-5"></a><span class="kw">glimpse</span>(sbr)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="adding-points.html#cb1-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="adding-points.html#cb1-2"></a></span>
+<span id="cb1-3"><a href="adding-points.html#cb1-3"></a>sbr &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;SBR-BR.csv&quot;</span>)</span>
+<span id="cb1-4"><a href="adding-points.html#cb1-4"></a></span>
+<span id="cb1-5"><a href="adding-points.html#cb1-5"></a><span class="kw">glimpse</span>(sbr)</span></code></pre></div>
 <pre><code>## Observations: 520
 ## Variables: 7
 ## $ season      &lt;chr&gt; &quot;2014/2015&quot;, &quot;2014/2015&quot;, &quot;2014/2015&quot;, &quot;2014/2015&quot;, …
@@ -229,16 +229,16 @@ Using the soybean rust observation data, add the points to the map of Brazil.</p
 <div id="add-soybean-rust-observations-to-br-ggplot2-object" class="section level3">
 <h3><span class="header-section-number">3.2.2</span> Add Soybean Rust Observations to <code>br</code> ggplot2 Object</h3>
 <p>Using <code>geom_point()</code> we can add points from the CSV file of observation data to the map of Brazil that we have already created.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="adding-points.html#cb18-1"></a>br <span class="op">+</span></span>
-<span id="cb18-2"><a href="adding-points.html#cb18-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sbr, <span class="kw">aes</span>(<span class="dt">x =</span> lon, <span class="dt">y =</span> lat))</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="adding-points.html#cb3-1"></a>br <span class="op">+</span></span>
+<span id="cb3-2"><a href="adding-points.html#cb3-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sbr, <span class="kw">aes</span>(<span class="dt">x =</span> lon, <span class="dt">y =</span> lat))</span></code></pre></div>
 <p><img src="mapping_with_ggplot2_files/figure-html/add-points-map-1.png" width="672" /></p>
 <p>That is not too clear. Perhaps it would be better to just plot the two states, rather than the whole country.
 Filter the <code>br_sf</code> object to create a new object of only these two states.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="adding-points.html#cb19-1"></a>rgs_pa &lt;-</span>
-<span id="cb19-2"><a href="adding-points.html#cb19-2"></a><span class="st">  </span><span class="kw">filter</span>(br_sf, name_pt <span class="op">==</span><span class="st"> &quot;Rio Grande do Sul&quot;</span> <span class="op">|</span></span>
-<span id="cb19-3"><a href="adding-points.html#cb19-3"></a><span class="st">           </span>name_pt <span class="op">==</span><span class="st"> &quot;Paraná&quot;</span>)</span>
-<span id="cb19-4"><a href="adding-points.html#cb19-4"></a></span>
-<span id="cb19-5"><a href="adding-points.html#cb19-5"></a>rgs_pa</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="adding-points.html#cb4-1"></a>rgs_pa &lt;-</span>
+<span id="cb4-2"><a href="adding-points.html#cb4-2"></a><span class="st">  </span><span class="kw">filter</span>(br_sf, name_pt <span class="op">==</span><span class="st"> &quot;Rio Grande do Sul&quot;</span> <span class="op">|</span></span>
+<span id="cb4-3"><a href="adding-points.html#cb4-3"></a><span class="st">           </span>name_pt <span class="op">==</span><span class="st"> &quot;Paraná&quot;</span>)</span>
+<span id="cb4-4"><a href="adding-points.html#cb4-4"></a></span>
+<span id="cb4-5"><a href="adding-points.html#cb4-5"></a>rgs_pa</span></code></pre></div>
 <pre><code>## Simple feature collection with 2 features and 83 fields
 ## geometry type:  MULTIPOLYGON
 ## dimension:      XY
@@ -292,52 +292,52 @@ Filter the <code>br_sf</code> object to create a new object of only these two st
 ## 2            Paraná    &lt;NA&gt; 1159307913 MULTIPOLYGON (((-54.35843 -...</code></pre>
 <p>Using the new object with only Rio Grande do Sul and Paraná, create a new map with the soybean rust observations.
 Note the use of the data call in both <code>geom_sf()</code> and <code>geom_point()</code> so that it is possible to mix different data sources in the same map.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="adding-points.html#cb21-1"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
-<span id="cb21-2"><a href="adding-points.html#cb21-2"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> rgs_pa, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
-<span id="cb21-3"><a href="adding-points.html#cb21-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sbr, <span class="kw">aes</span>(<span class="dt">x =</span> lon, <span class="dt">y =</span> lat)) <span class="op">+</span></span>
-<span id="cb21-4"><a href="adding-points.html#cb21-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>) <span class="op">+</span></span>
-<span id="cb21-5"><a href="adding-points.html#cb21-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
-<span id="cb21-6"><a href="adding-points.html#cb21-6"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="adding-points.html#cb6-1"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb6-2"><a href="adding-points.html#cb6-2"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> rgs_pa, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
+<span id="cb6-3"><a href="adding-points.html#cb6-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sbr, <span class="kw">aes</span>(<span class="dt">x =</span> lon, <span class="dt">y =</span> lat)) <span class="op">+</span></span>
+<span id="cb6-4"><a href="adding-points.html#cb6-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb6-5"><a href="adding-points.html#cb6-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb6-6"><a href="adding-points.html#cb6-6"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span></code></pre></div>
 <p><img src="mapping_with_ggplot2_files/figure-html/plot-sbr-states2-1.png" width="672" /></p>
 <p>To show more information about the soybean rust outbreaks, we can use colours in the points.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="adding-points.html#cb22-1"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
-<span id="cb22-2"><a href="adding-points.html#cb22-2"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> rgs_pa, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
-<span id="cb22-3"><a href="adding-points.html#cb22-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sbr, <span class="kw">aes</span>(<span class="dt">x =</span> lon, <span class="dt">y =</span> lat, <span class="dt">colour =</span> month)) <span class="op">+</span></span>
-<span id="cb22-4"><a href="adding-points.html#cb22-4"></a><span class="st">  </span><span class="kw">scale_color_viridis_d</span>(<span class="st">&quot;First</span><span class="ch">\n</span><span class="st">Report&quot;</span>) <span class="op">+</span></span>
-<span id="cb22-5"><a href="adding-points.html#cb22-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>) <span class="op">+</span></span>
-<span id="cb22-6"><a href="adding-points.html#cb22-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
-<span id="cb22-7"><a href="adding-points.html#cb22-7"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="adding-points.html#cb7-1"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb7-2"><a href="adding-points.html#cb7-2"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> rgs_pa, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
+<span id="cb7-3"><a href="adding-points.html#cb7-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sbr, <span class="kw">aes</span>(<span class="dt">x =</span> lon, <span class="dt">y =</span> lat, <span class="dt">colour =</span> month)) <span class="op">+</span></span>
+<span id="cb7-4"><a href="adding-points.html#cb7-4"></a><span class="st">  </span><span class="kw">scale_color_viridis_d</span>(<span class="st">&quot;First</span><span class="ch">\n</span><span class="st">Report&quot;</span>) <span class="op">+</span></span>
+<span id="cb7-5"><a href="adding-points.html#cb7-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb7-6"><a href="adding-points.html#cb7-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb7-7"><a href="adding-points.html#cb7-7"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span></code></pre></div>
 <p><img src="mapping_with_ggplot2_files/figure-html/plot-sbr-states3-1.png" width="672" /></p>
 <p>That is more useful, but we have multiple years and the months are not in order.
 To correct this, we will modify the <code>sbr</code> object and make the “month” column a factor and reorder it to follow the soybean growing season.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="adding-points.html#cb23-1"></a>sbr &lt;-</span>
-<span id="cb23-2"><a href="adding-points.html#cb23-2"></a><span class="st">  </span>sbr <span class="op">%&gt;%</span></span>
-<span id="cb23-3"><a href="adding-points.html#cb23-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">as_factor</span>(month)) <span class="op">%&gt;%</span></span>
-<span id="cb23-4"><a href="adding-points.html#cb23-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">fct_relevel</span>(month, <span class="kw">c</span>(<span class="st">&quot;Nov&quot;</span>, <span class="st">&quot;Dec&quot;</span>, <span class="st">&quot;Jan&quot;</span>, <span class="st">&quot;Feb&quot;</span>, <span class="st">&quot;Mar&quot;</span>)))</span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="adding-points.html#cb24-1"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
-<span id="cb24-2"><a href="adding-points.html#cb24-2"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> rgs_pa, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
-<span id="cb24-3"><a href="adding-points.html#cb24-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sbr, <span class="kw">aes</span>(<span class="dt">x =</span> lon, <span class="dt">y =</span> lat, <span class="dt">colour =</span> month)) <span class="op">+</span></span>
-<span id="cb24-4"><a href="adding-points.html#cb24-4"></a><span class="st">  </span><span class="kw">scale_color_viridis_d</span>(<span class="st">&quot;First</span><span class="ch">\n</span><span class="st">Report&quot;</span>) <span class="op">+</span></span>
-<span id="cb24-5"><a href="adding-points.html#cb24-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>) <span class="op">+</span></span>
-<span id="cb24-6"><a href="adding-points.html#cb24-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
-<span id="cb24-7"><a href="adding-points.html#cb24-7"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="adding-points.html#cb8-1"></a>sbr &lt;-</span>
+<span id="cb8-2"><a href="adding-points.html#cb8-2"></a><span class="st">  </span>sbr <span class="op">%&gt;%</span></span>
+<span id="cb8-3"><a href="adding-points.html#cb8-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">as_factor</span>(month)) <span class="op">%&gt;%</span></span>
+<span id="cb8-4"><a href="adding-points.html#cb8-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">fct_relevel</span>(month, <span class="kw">c</span>(<span class="st">&quot;Nov&quot;</span>, <span class="st">&quot;Dec&quot;</span>, <span class="st">&quot;Jan&quot;</span>, <span class="st">&quot;Feb&quot;</span>, <span class="st">&quot;Mar&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="adding-points.html#cb9-1"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb9-2"><a href="adding-points.html#cb9-2"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> rgs_pa, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
+<span id="cb9-3"><a href="adding-points.html#cb9-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sbr, <span class="kw">aes</span>(<span class="dt">x =</span> lon, <span class="dt">y =</span> lat, <span class="dt">colour =</span> month)) <span class="op">+</span></span>
+<span id="cb9-4"><a href="adding-points.html#cb9-4"></a><span class="st">  </span><span class="kw">scale_color_viridis_d</span>(<span class="st">&quot;First</span><span class="ch">\n</span><span class="st">Report&quot;</span>) <span class="op">+</span></span>
+<span id="cb9-5"><a href="adding-points.html#cb9-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb9-6"><a href="adding-points.html#cb9-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb9-7"><a href="adding-points.html#cb9-7"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span></code></pre></div>
 <p><img src="mapping_with_ggplot2_files/figure-html/plot-sbr-states4-1.png" width="672" /></p>
 <p>Now plotting the data again shows that the months are in the proper order but there are multiple years.
 We can use faceting to make the maps more clear and see patterns.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="adding-points.html#cb25-1"></a><span class="kw">library</span>(lubridate)</span>
-<span id="cb25-2"><a href="adding-points.html#cb25-2"></a></span>
-<span id="cb25-3"><a href="adding-points.html#cb25-3"></a>sbr &lt;-<span class="st"> </span></span>
-<span id="cb25-4"><a href="adding-points.html#cb25-4"></a><span class="st">  </span>sbr <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb25-5"><a href="adding-points.html#cb25-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year =</span> <span class="kw">year</span>(date_report))</span>
-<span id="cb25-6"><a href="adding-points.html#cb25-6"></a></span>
-<span id="cb25-7"><a href="adding-points.html#cb25-7"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
-<span id="cb25-8"><a href="adding-points.html#cb25-8"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> rgs_pa, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
-<span id="cb25-9"><a href="adding-points.html#cb25-9"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sbr, <span class="kw">aes</span>(<span class="dt">x =</span> lon, <span class="dt">y =</span> lat, <span class="dt">colour =</span> month)) <span class="op">+</span></span>
-<span id="cb25-10"><a href="adding-points.html#cb25-10"></a><span class="st">  </span><span class="kw">scale_color_viridis_d</span>(<span class="st">&quot;First</span><span class="ch">\n</span><span class="st">Report&quot;</span>) <span class="op">+</span></span>
-<span id="cb25-11"><a href="adding-points.html#cb25-11"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>) <span class="op">+</span></span>
-<span id="cb25-12"><a href="adding-points.html#cb25-12"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
-<span id="cb25-13"><a href="adding-points.html#cb25-13"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
-<span id="cb25-14"><a href="adding-points.html#cb25-14"></a><span class="st">  </span><span class="kw">facet_wrap</span>(. <span class="op">~</span><span class="st"> </span>year)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="adding-points.html#cb10-1"></a><span class="kw">library</span>(lubridate)</span>
+<span id="cb10-2"><a href="adding-points.html#cb10-2"></a></span>
+<span id="cb10-3"><a href="adding-points.html#cb10-3"></a>sbr &lt;-<span class="st"> </span></span>
+<span id="cb10-4"><a href="adding-points.html#cb10-4"></a><span class="st">  </span>sbr <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb10-5"><a href="adding-points.html#cb10-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year =</span> <span class="kw">year</span>(date_report))</span>
+<span id="cb10-6"><a href="adding-points.html#cb10-6"></a></span>
+<span id="cb10-7"><a href="adding-points.html#cb10-7"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb10-8"><a href="adding-points.html#cb10-8"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> rgs_pa, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
+<span id="cb10-9"><a href="adding-points.html#cb10-9"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sbr, <span class="kw">aes</span>(<span class="dt">x =</span> lon, <span class="dt">y =</span> lat, <span class="dt">colour =</span> month)) <span class="op">+</span></span>
+<span id="cb10-10"><a href="adding-points.html#cb10-10"></a><span class="st">  </span><span class="kw">scale_color_viridis_d</span>(<span class="st">&quot;First</span><span class="ch">\n</span><span class="st">Report&quot;</span>) <span class="op">+</span></span>
+<span id="cb10-11"><a href="adding-points.html#cb10-11"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb10-12"><a href="adding-points.html#cb10-12"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb10-13"><a href="adding-points.html#cb10-13"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb10-14"><a href="adding-points.html#cb10-14"></a><span class="st">  </span><span class="kw">facet_wrap</span>(. <span class="op">~</span><span class="st"> </span>year)</span></code></pre></div>
 <p><img src="mapping_with_ggplot2_files/figure-html/plot-sbr-states5-1.png" width="672" /></p>
 </div>
 </div>

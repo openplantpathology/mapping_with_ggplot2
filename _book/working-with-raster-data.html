@@ -176,7 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#your-turn-2"><i class="fa fa-check"></i><b>4.3</b> Your turn</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="wrap-up.html"><a href="wrap-up.html"><i class="fa fa-check"></i><b>5</b> Wrap Up</a><ul>
-<li class="chapter" data-level="5.1" data-path="wrap-up.html"><a href="wrap-up.html#further-reading"><i class="fa fa-check"></i><b>5.1</b> Further Reading</a></li>
+<li class="chapter" data-level="5.1" data-path="wrap-up.html"><a href="wrap-up.html#learning-more"><i class="fa fa-check"></i><b>5.1</b> Learning more</a></li>
 <li class="chapter" data-level="5.2" data-path="wrap-up.html"><a href="wrap-up.html#references"><i class="fa fa-check"></i><b>5.2</b> References</a></li>
 </ul></li>
 <li class="divider"></li>
@@ -209,12 +209,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="download-climate-data-from-worldclim" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> Download climate data from Worldclim</h3>
 <p><em>raster</em> has functionality built-in to download files and import them automatically to your R session for you.
-We will use this functionality to get Worldcim data for minimum temperature.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="working-with-raster-data.html#cb26-1"></a><span class="kw">library</span>(raster)</span>
-<span id="cb26-2"><a href="working-with-raster-data.html#cb26-2"></a></span>
-<span id="cb26-3"><a href="working-with-raster-data.html#cb26-3"></a>tmin &lt;-<span class="st"> </span><span class="kw">getData</span>(<span class="st">&quot;worldclim&quot;</span>, <span class="dt">var =</span> <span class="st">&quot;tmin&quot;</span>, <span class="dt">res =</span> <span class="dv">10</span>)</span>
-<span id="cb26-4"><a href="working-with-raster-data.html#cb26-4"></a></span>
-<span id="cb26-5"><a href="working-with-raster-data.html#cb26-5"></a><span class="kw">summary</span>(tmin)</span></code></pre></div>
+We will use this functionality to get Worldclim data for minimum temperature.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="working-with-raster-data.html#cb33-1"></a><span class="kw">library</span>(raster)</span>
+<span id="cb33-2"><a href="working-with-raster-data.html#cb33-2"></a></span>
+<span id="cb33-3"><a href="working-with-raster-data.html#cb33-3"></a>tmin &lt;-<span class="st"> </span><span class="kw">getData</span>(<span class="st">&quot;worldclim&quot;</span>, <span class="dt">var =</span> <span class="st">&quot;tmin&quot;</span>, <span class="dt">res =</span> <span class="dv">10</span>)</span>
+<span id="cb33-4"><a href="working-with-raster-data.html#cb33-4"></a></span>
+<span id="cb33-5"><a href="working-with-raster-data.html#cb33-5"></a><span class="kw">summary</span>(tmin)</span></code></pre></div>
 <pre><code>##           tmin1   tmin2   tmin3   tmin4   tmin5   tmin6   tmin7   tmin8
 ## Min.       -536    -518    -464    -376    -223    -146    -144    -150
 ## 1st Qu.    -269    -254    -195    -100     -19      37      61      53
@@ -234,16 +234,16 @@ In other words, this stack has several layers of data, one for each month plus t
 </div>
 <div id="convert-temperature-data" class="section level3">
 <h3><span class="header-section-number">4.2.2</span> Convert temperature data</h3>
-<p>Worldclim temperature data need to be divided by 10 to convert back to degrees Celcius.
+<p>Worldclim temperature data need to be divided by 10 to convert back to degrees Celsius.
 This will convert all of the layers.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="working-with-raster-data.html#cb28-1"></a>tmin &lt;-<span class="st"> </span>tmin<span class="op">/</span><span class="dv">10</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="working-with-raster-data.html#cb35-1"></a>tmin &lt;-<span class="st"> </span>tmin<span class="op">/</span><span class="dv">10</span></span></code></pre></div>
 </div>
 <div id="create-a-data-set-for-january" class="section level3">
 <h3><span class="header-section-number">4.2.3</span> Create a data set for January</h3>
 <p>We can create a new object for just the minimum temperature in January.
 Using the <code>[[]]</code> is called indexing, it tells R to take the first object in the stack.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="working-with-raster-data.html#cb29-1"></a>tmin1 &lt;-<span class="st"> </span>tmin[[<span class="dv">1</span>]]</span>
-<span id="cb29-2"><a href="working-with-raster-data.html#cb29-2"></a><span class="kw">class</span>(tmin1)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="working-with-raster-data.html#cb36-1"></a>tmin1 &lt;-<span class="st"> </span>tmin[[<span class="dv">1</span>]]</span>
+<span id="cb36-2"><a href="working-with-raster-data.html#cb36-2"></a><span class="kw">class</span>(tmin1)</span></code></pre></div>
 <pre><code>## [1] &quot;RasterLayer&quot;
 ## attr(,&quot;package&quot;)
 ## [1] &quot;raster&quot;</code></pre>
@@ -253,17 +253,17 @@ Using the <code>[[]]</code> is called indexing, it tells R to take the first obj
 <p>However, the data are in a format that <em>ggplot2</em> still will not understand, a <code>raster</code> object.
 We need to convert it to a data frame.
 <em>raster</em> has a built-in function to do this for us.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="working-with-raster-data.html#cb31-1"></a>tmin1_df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(tmin1, <span class="dt">xy =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb31-2"><a href="working-with-raster-data.html#cb31-2"></a><span class="kw">class</span>(tmin1_df)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="working-with-raster-data.html#cb38-1"></a>tmin1_df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(tmin1, <span class="dt">xy =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb38-2"><a href="working-with-raster-data.html#cb38-2"></a><span class="kw">class</span>(tmin1_df)</span></code></pre></div>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
 <p>Now we we are ready to plot the data in <em>ggplot2</em>.</p>
 </div>
 <div id="plot-global-minimum-temperatures" class="section level3">
 <h3><span class="header-section-number">4.2.5</span> Plot global minimum temperatures</h3>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="working-with-raster-data.html#cb33-1"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
-<span id="cb33-2"><a href="working-with-raster-data.html#cb33-2"></a><span class="st">    </span><span class="kw">geom_raster</span>(<span class="dt">data =</span> tmin1_df, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">fill =</span> tmin1)) <span class="op">+</span></span>
-<span id="cb33-3"><a href="working-with-raster-data.html#cb33-3"></a><span class="st">    </span><span class="kw">scale_fill_viridis_c</span>(<span class="st">&quot;Jan</span><span class="ch">\n</span><span class="st">Min</span><span class="ch">\n</span><span class="st">T&quot;</span>, <span class="dt">na.value =</span> <span class="ot">NA</span>) <span class="op">+</span></span>
-<span id="cb33-4"><a href="working-with-raster-data.html#cb33-4"></a><span class="st">    </span><span class="kw">coord_quickmap</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="working-with-raster-data.html#cb40-1"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb40-2"><a href="working-with-raster-data.html#cb40-2"></a><span class="st">    </span><span class="kw">geom_raster</span>(<span class="dt">data =</span> tmin1_df, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">fill =</span> tmin1)) <span class="op">+</span></span>
+<span id="cb40-3"><a href="working-with-raster-data.html#cb40-3"></a><span class="st">    </span><span class="kw">scale_fill_viridis_c</span>(<span class="st">&quot;Jan</span><span class="ch">\n</span><span class="st">Min</span><span class="ch">\n</span><span class="st">T&quot;</span>, <span class="dt">na.value =</span> <span class="ot">NA</span>) <span class="op">+</span></span>
+<span id="cb40-4"><a href="working-with-raster-data.html#cb40-4"></a><span class="st">    </span><span class="kw">coord_quickmap</span>()</span></code></pre></div>
 <pre><code>## Warning: Removed 1359281 rows containing missing values (geom_raster).</code></pre>
 <p><img src="mapping_with_ggplot2_files/figure-html/plot-tmin1.1-1.png" width="672" /></p>
 </div>
@@ -276,41 +276,41 @@ We will use the <code>br_sf</code> object to instruct <em>raster</em> where our 
 Using the base <code>plot()</code> method, quickly explore the new object, <code>brazil</code> that is created.</p>
 <div id="crop-operation" class="section level4">
 <h4><span class="header-section-number">4.2.6.1</span> Crop operation</h4>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="working-with-raster-data.html#cb35-1"></a>brazil &lt;-<span class="st"> </span><span class="kw">crop</span>(tmin1, br_sf)</span>
-<span id="cb35-2"><a href="working-with-raster-data.html#cb35-2"></a></span>
-<span id="cb35-3"><a href="working-with-raster-data.html#cb35-3"></a><span class="kw">plot</span>(brazil)</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="working-with-raster-data.html#cb42-1"></a>brazil &lt;-<span class="st"> </span><span class="kw">crop</span>(tmin1, br_sf)</span>
+<span id="cb42-2"><a href="working-with-raster-data.html#cb42-2"></a></span>
+<span id="cb42-3"><a href="working-with-raster-data.html#cb42-3"></a><span class="kw">plot</span>(brazil)</span></code></pre></div>
 <p><img src="mapping_with_ggplot2_files/figure-html/crop-1.png" width="672" /></p>
 </div>
 <div id="mask-operation" class="section level4">
 <h4><span class="header-section-number">4.2.6.2</span> Mask operation</h4>
 <p>The <code>brazil</code> object is not only Brazil but also bits of other countries nearby.
 To fix this we will now use <code>mask()</code> from the <em>raster</em> package to remove data that are outside the outline of Brazil.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="working-with-raster-data.html#cb36-1"></a>brazil &lt;-<span class="st"> </span><span class="kw">mask</span>(brazil, br_sf)</span>
-<span id="cb36-2"><a href="working-with-raster-data.html#cb36-2"></a><span class="kw">plot</span>(brazil)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="working-with-raster-data.html#cb43-1"></a>brazil &lt;-<span class="st"> </span><span class="kw">mask</span>(brazil, br_sf)</span>
+<span id="cb43-2"><a href="working-with-raster-data.html#cb43-2"></a><span class="kw">plot</span>(brazil)</span></code></pre></div>
 <p><img src="mapping_with_ggplot2_files/figure-html/mask-1.png" width="672" /></p>
 <p>Now that we have the data we desire, we can convert it into a <code>data.frame</code> suitable for use in <em>ggplot2</em>.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="working-with-raster-data.html#cb37-1"></a>brazil &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(brazil, <span class="dt">xy =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="working-with-raster-data.html#cb44-1"></a>brazil &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(brazil, <span class="dt">xy =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="plot-brazil-minimum-temperature" class="section level3">
 <h3><span class="header-section-number">4.2.7</span> Plot Brazil minimum temperature</h3>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="working-with-raster-data.html#cb38-1"></a>br_tmin &lt;-</span>
-<span id="cb38-2"><a href="working-with-raster-data.html#cb38-2"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
-<span id="cb38-3"><a href="working-with-raster-data.html#cb38-3"></a><span class="st">  </span><span class="kw">geom_raster</span>(<span class="dt">data =</span> brazil, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">fill =</span> tmin1)) <span class="op">+</span></span>
-<span id="cb38-4"><a href="working-with-raster-data.html#cb38-4"></a><span class="st">  </span><span class="kw">scale_fill_viridis_c</span>(<span class="st">&quot;Jan Min</span><span class="ch">\n</span><span class="st">T (°C)&quot;</span>, <span class="dt">na.value =</span> <span class="ot">NA</span>) <span class="op">+</span></span>
-<span id="cb38-5"><a href="working-with-raster-data.html#cb38-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>) <span class="op">+</span></span>
-<span id="cb38-6"><a href="working-with-raster-data.html#cb38-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
-<span id="cb38-7"><a href="working-with-raster-data.html#cb38-7"></a><span class="st">  </span><span class="kw">coord_quickmap</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="working-with-raster-data.html#cb45-1"></a>br_tmin &lt;-</span>
+<span id="cb45-2"><a href="working-with-raster-data.html#cb45-2"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb45-3"><a href="working-with-raster-data.html#cb45-3"></a><span class="st">  </span><span class="kw">geom_raster</span>(<span class="dt">data =</span> brazil, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">fill =</span> tmin1)) <span class="op">+</span></span>
+<span id="cb45-4"><a href="working-with-raster-data.html#cb45-4"></a><span class="st">  </span><span class="kw">scale_fill_viridis_c</span>(<span class="st">&quot;Jan Min</span><span class="ch">\n</span><span class="st">T (°C)&quot;</span>, <span class="dt">na.value =</span> <span class="ot">NA</span>) <span class="op">+</span></span>
+<span id="cb45-5"><a href="working-with-raster-data.html#cb45-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb45-6"><a href="working-with-raster-data.html#cb45-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb45-7"><a href="working-with-raster-data.html#cb45-7"></a><span class="st">  </span><span class="kw">coord_quickmap</span>()</span></code></pre></div>
 </div>
 <div id="adding-state-outlines" class="section level3">
 <h3><span class="header-section-number">4.2.8</span> Adding state outlines</h3>
 <p>We can add the state outlines on top of the minimum temperatures as a new layer.
 Using the <code>br_sf</code> object and <code>geom_sf()</code> will add state outlines. However, <code>fill</code> must be set to <code>NA</code> or the polygons will be filled with default grey.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="working-with-raster-data.html#cb39-1"></a>br_tmin <span class="op">+</span></span>
-<span id="cb39-2"><a href="working-with-raster-data.html#cb39-2"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> br_sf,</span>
-<span id="cb39-3"><a href="working-with-raster-data.html#cb39-3"></a>          <span class="dt">fill =</span> <span class="ot">NA</span>,</span>
-<span id="cb39-4"><a href="working-with-raster-data.html#cb39-4"></a>          <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></span>
-<span id="cb39-5"><a href="working-with-raster-data.html#cb39-5"></a><span class="st">  </span><span class="kw">coord_sf</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="working-with-raster-data.html#cb46-1"></a>br_tmin <span class="op">+</span></span>
+<span id="cb46-2"><a href="working-with-raster-data.html#cb46-2"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> br_sf,</span>
+<span id="cb46-3"><a href="working-with-raster-data.html#cb46-3"></a>          <span class="dt">fill =</span> <span class="ot">NA</span>,</span>
+<span id="cb46-4"><a href="working-with-raster-data.html#cb46-4"></a>          <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></span>
+<span id="cb46-5"><a href="working-with-raster-data.html#cb46-5"></a><span class="st">  </span><span class="kw">coord_sf</span>()</span></code></pre></div>
 <p><img src="mapping_with_ggplot2_files/figure-html/tmin-states-1.png" width="672" /></p>
 </div>
 </div>
