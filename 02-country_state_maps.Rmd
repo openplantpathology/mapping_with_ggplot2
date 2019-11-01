@@ -1,0 +1,133 @@
+
+# Creating Country and State Level Maps
+
+## Introduction
+
+In this first exercise we will use [_rnaturalearth_](https://github.com/ropenscilabs/rnaturalearth), [_simple features_](https://cran.r-project.org/web/packages/sf/vignettes/sf1.html) and
+_ggplot2_ to create a map of Brazil and states within Brazil to use as the base of the maps we will create in these exercises.
+
+## Exercises
+
+### Create Country Level Map of Brazil
+
+This is our base layer, Brazil, of the map from (Naturalearth.com)[https://naturalearth.com/] using the base `plot()` to display these data.
+
+```{r brazil-base}
+library(rnaturalearth)
+
+br_sf <- ne_states(geounit = "brazil",
+                   returnclass = "sf")
+
+plot(br_sf)
+```
+
+#### Plot using `ggplot2`
+
+Using _ggplot2_, we have more control over how the data are displayed.
+
+First plot the whole country using `ggplot()`.
+
+```{r plot_level1, eval=TRUE}
+library(ggplot2)
+
+br <- ggplot(br_sf) +
+  geom_sf(fill = "white")
+
+br
+```
+
+#### Add Labels to the States
+
+```{r plot_level2}
+br <-
+  br +
+  geom_text(
+    data = br_sf,
+    aes(x = longitude,
+        y = latitude,
+        label = abbrev),
+    size = 2.5,
+    hjust = 1
+  )
+
+br
+```
+
+#### Final Touches
+
+Properly label the x and y-axis and set the theme. The _ggplot2_ theme, `theme_bw()` is nice to use with maps, so we will apply that here as well.
+
+```{r plot_level3}
+br <- 
+  br +
+  xlab("Longitude") +
+  ylab("Latitude") +
+  theme_bw()
+
+br
+```
+
+### Create Maps of Individual States
+
+To create a map of only Minas Gerais, subset the _sf_ object, `br` such that it contains only the data for Minas Gerais.
+
+#### Inspect Column Names in `br_sf` Object
+
+To find out what the column names are, we can use, `colnames()`.
+
+```{r colnames}
+names(br_sf)
+```
+
+We see that a column named "name_pt" exists, with the Portuguese name spelling for each state in this data set.
+
+We can use this to `filter()` the data so that it only represents Minas Gerais and we can use that to make a map.
+
+For more on subsetting _sf_ objects, see: <https://cran.rstudio.com/web/packages/sf/vignettes/sf4.html>
+
+#### Filter Minas Gerais
+
+```{r subset-mg}
+library(dplyr)
+
+mg <- filter(br_sf, name_pt == "Minas Gerais")
+
+mg
+```
+
+#### Plot Minas Gerais
+
+```{r ggplot-mg}
+ggplot(mg) +
+  geom_sf() +
+  xlab("Longitude") +
+  ylab("Latitude") +
+  theme_bw()
+```
+
+### Highlighting States Within the Country
+
+Using the `br_sf` and `mg` objects that we have created, it is possible to create a map that highlights one state and labels it using the abbreviation, in this case Minas Gerais.
+
+```{r hightlight-mg}
+ggplot(br_sf) +
+  geom_sf(fill = "white") +
+  geom_sf(
+    data = mg,
+    fill = "red") +
+  geom_text(
+    data = mg,
+    aes(x = longitude,
+        y = latitude,
+        label = abbrev),
+    size = 2.5,
+    hjust = 1) +
+  xlab("Longitude") +
+  ylab("Latitude") +
+  theme_bw()
+```
+
+## Your Turn
+
+> **Using the examples above, download and create a map of Australia. Then highlight Queensland.**
+

@@ -1,0 +1,37 @@
+--- 
+title: "An Easy Introduction to Mapping in R with ggplot2"
+author: "Adam H. Sparks"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [packages.bib]
+biblio-style: apalike
+link-citations: yes
+description: "This book contains examples of how to make simple maps in ggplot2."
+---
+
+# Introduction {-}
+
+Creating maps with R often feels like a hard task, but it does not have to be.
+With just a few packages it is possible to create high-quality maps using _ggplot2_.
+
+## What you will learn
+
+Geographic information systems (GIS) is a field large enough to have whole degree programs dedicated to it and indeed, entire companies (_e.g._, [ESRI](https://www.esri.com/en-us/home)).
+This short lesson will help you understand enough basic information to find and import data into R to create maps of your own research data.
+It will not teach you all aspects of GIS or how to perform spatial analysis.
+You will learn about the types of data that are used in making maps and how they differ and how you use them differently to create a map that clearly conveys the information you wish to deliver.
+
+## What you will use
+
+In this workshop we have already introduced the _tidyverse_, which _ggplot2_ is a part of.
+We will use this to create our maps along with other packages for handling spatial data and importing data.
+
+## Colophon
+
+An online version of this book is available at http://adamhsparks.github.io...  The source of the book is available at https://github.com/adamhsparks/.... The book is powered by https://bookdown.org which makes it easy to turn R markdown files into HTML, PDF, and EPUB.
+
+This book was built with:
+```{r sessioninfo}
+sessioninfo::session_info()
+```

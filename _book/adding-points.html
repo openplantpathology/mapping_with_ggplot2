@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Adding Points | An Easy Introduction to Mapping in R with ggplot2</title>
+  <meta name="description" content="This book contains examples of how to make simple maps in ggplot2." />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Adding Points | An Easy Introduction to Mapping in R with ggplot2" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book contains examples of how to make simple maps in ggplot2." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Adding Points | An Easy Introduction to Mapping in R with ggplot2" />
+  
+  <meta name="twitter:description" content="This book contains examples of how to make simple maps in ggplot2." />
+  
+
+<meta name="author" content="Adam H. Sparks" />
+
+
+<meta name="date" content="2019-11-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="creating-country-and-state-level-maps.html"/>
+<link rel="next" href="working-with-raster-data.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">An Easy Introduction to Mapping in R with ggplot2</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#what-you-will-learn"><i class="fa fa-check"></i><b>0.1</b> What you will learn</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#what-you-will-use"><i class="fa fa-check"></i><b>0.2</b> What you will use</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#colophon"><i class="fa fa-check"></i><b>0.3</b> Colophon</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Working with Spatial Data in R</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#forms-of-spatial-data"><i class="fa fa-check"></i><b>1.1</b> Forms of Spatial Data</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#spatial-packages"><i class="fa fa-check"></i><b>1.2</b> Spatial Packages</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#exercises"><i class="fa fa-check"></i><b>1.3</b> Exercises</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#install-spatial-packages"><i class="fa fa-check"></i><b>1.3.1</b> Install Spatial Packages</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html"><i class="fa fa-check"></i><b>2</b> Creating Country and State Level Maps</a><ul>
+<li class="chapter" data-level="2.1" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#exercises-1"><i class="fa fa-check"></i><b>2.2</b> Exercises</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#create-country-level-map-of-brazil"><i class="fa fa-check"></i><b>2.2.1</b> Create Country Level Map of Brazil</a></li>
+<li class="chapter" data-level="2.2.2" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#create-maps-of-individual-states"><i class="fa fa-check"></i><b>2.2.2</b> Create Maps of Individual States</a></li>
+<li class="chapter" data-level="2.2.3" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#highlighting-states-within-the-country"><i class="fa fa-check"></i><b>2.2.3</b> Highlighting States Within the Country</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#your-turn"><i class="fa fa-check"></i><b>2.3</b> Your Turn</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="adding-points.html"><a href="adding-points.html"><i class="fa fa-check"></i><b>3</b> Adding Points</a><ul>
+<li class="chapter" data-level="3.1" data-path="adding-points.html"><a href="adding-points.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="adding-points.html"><a href="adding-points.html#exercises-2"><i class="fa fa-check"></i><b>3.2</b> Exercises</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="adding-points.html"><a href="adding-points.html#import-soybean-rust-observations"><i class="fa fa-check"></i><b>3.2.1</b> Import Soybean Rust Observations</a></li>
+<li class="chapter" data-level="3.2.2" data-path="adding-points.html"><a href="adding-points.html#add-soybean-rust-observations-to-br-ggplot2-object"><i class="fa fa-check"></i><b>3.2.2</b> Add Soybean Rust Observations to <code>br</code> ggplot2 Object</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="adding-points.html"><a href="adding-points.html#your-turn-1"><i class="fa fa-check"></i><b>3.3</b> Your Turn</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html"><i class="fa fa-check"></i><b>4</b> Working with Raster Data</a><ul>
+<li class="chapter" data-level="4.1" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#exercises-3"><i class="fa fa-check"></i><b>4.2</b> Exercises</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#download-climate-data-from-worldclim"><i class="fa fa-check"></i><b>4.2.1</b> Download climate data from Worldclim</a></li>
+<li class="chapter" data-level="4.2.2" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#convert-temperature-data"><i class="fa fa-check"></i><b>4.2.2</b> Convert temperature data</a></li>
+<li class="chapter" data-level="4.2.3" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#create-a-data-set-for-january"><i class="fa fa-check"></i><b>4.2.3</b> Create a data set for January</a></li>
+<li class="chapter" data-level="4.2.4" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#create-data-frame-for-ggplot2"><i class="fa fa-check"></i><b>4.2.4</b> Create data frame for ggplot2</a></li>
+<li class="chapter" data-level="4.2.5" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#plot-global-minimum-temperatures"><i class="fa fa-check"></i><b>4.2.5</b> Plot global minimum temperatures</a></li>
+<li class="chapter" data-level="4.2.6" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#brazil-minimum-temperature"><i class="fa fa-check"></i><b>4.2.6</b> Brazil minimum temperature</a></li>
+<li class="chapter" data-level="4.2.7" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#plot-brazil-minimum-temperature"><i class="fa fa-check"></i><b>4.2.7</b> Plot Brazil minimum temperature</a></li>
+<li class="chapter" data-level="4.2.8" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#adding-state-outlines"><i class="fa fa-check"></i><b>4.2.8</b> Adding state outlines</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#your-turn-2"><i class="fa fa-check"></i><b>4.3</b> Your turn</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="wrap-up.html"><a href="wrap-up.html"><i class="fa fa-check"></i><b>5</b> Wrap Up</a><ul>
+<li class="chapter" data-level="5.1" data-path="wrap-up.html"><a href="wrap-up.html#further-reading"><i class="fa fa-check"></i><b>5.1</b> Further Reading</a></li>
+<li class="chapter" data-level="5.2" data-path="wrap-up.html"><a href="wrap-up.html#references"><i class="fa fa-check"></i><b>5.2</b> References</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/adamhsparks/ggplot2_mapping" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An Easy Introduction to Mapping in R with ggplot2</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="adding-points" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Adding Points</h1>
+<div id="introduction-2" class="section level2">
+<h2><span class="header-section-number">3.1</span> Introduction</h2>
+<p>In many cases we may have a data set of interest that has georeferenced data (lat, lon values).
+Using the soybean rust observation data, add the points to the map of Brazil.</p>
+</div>
+<div id="exercises-2" class="section level2">
+<h2><span class="header-section-number">3.2</span> Exercises</h2>
+<div id="import-soybean-rust-observations" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Import Soybean Rust Observations</h3>
+<p>We will load the <em>tidyverse</em> package for these next steps.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="adding-points.html#cb16-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb16-2"><a href="adding-points.html#cb16-2"></a></span>
+<span id="cb16-3"><a href="adding-points.html#cb16-3"></a>sbr &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;SBR-BR.csv&quot;</span>)</span>
+<span id="cb16-4"><a href="adding-points.html#cb16-4"></a></span>
+<span id="cb16-5"><a href="adding-points.html#cb16-5"></a><span class="kw">glimpse</span>(sbr)</span></code></pre></div>
+<pre><code>## Observations: 520
+## Variables: 7
+## $ season      &lt;chr&gt; &quot;2014/2015&quot;, &quot;2014/2015&quot;, &quot;2014/2015&quot;, &quot;2014/2015&quot;, …
+## $ location    &lt;chr&gt; &quot;Alto Piquiri&quot;, &quot;Alvorada do Sul&quot;, &quot;Arapoti&quot;, &quot;Arroi…
+## $ lat         &lt;dbl&gt; -24.028, -22.780, -24.158, -32.238, -24.420, -31.331…
+## $ lon         &lt;dbl&gt; -53.441, -51.231, -49.827, -53.087, -53.521, -54.107…
+## $ state       &lt;chr&gt; &quot;PR&quot;, &quot;PR&quot;, &quot;PR&quot;, &quot;RS&quot;, &quot;PR&quot;, &quot;RS&quot;, &quot;PR&quot;, &quot;PR&quot;, &quot;RS&quot;…
+## $ date_report &lt;date&gt; 2015-01-16, 2015-02-04, 2014-12-12, 2015-02-25, 201…
+## $ month       &lt;chr&gt; &quot;Jan&quot;, &quot;Feb&quot;, &quot;Dec&quot;, &quot;Feb&quot;, &quot;Jan&quot;, &quot;Feb&quot;, &quot;Dec&quot;, &quot;Ja…</code></pre>
+</div>
+<div id="add-soybean-rust-observations-to-br-ggplot2-object" class="section level3">
+<h3><span class="header-section-number">3.2.2</span> Add Soybean Rust Observations to <code>br</code> ggplot2 Object</h3>
+<p>Using <code>geom_point()</code> we can add points from the CSV file of observation data to the map of Brazil that we have already created.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="adding-points.html#cb18-1"></a>br <span class="op">+</span></span>
+<span id="cb18-2"><a href="adding-points.html#cb18-2"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sbr, <span class="kw">aes</span>(<span class="dt">x =</span> lon, <span class="dt">y =</span> lat))</span></code></pre></div>
+<p><img src="mapping_with_ggplot2_files/figure-html/add-points-map-1.png" width="672" /></p>
+<p>That is not too clear. Perhaps it would be better to just plot the two states, rather than the whole country.
+Filter the <code>br_sf</code> object to create a new object of only these two states.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="adding-points.html#cb19-1"></a>rgs_pa &lt;-</span>
+<span id="cb19-2"><a href="adding-points.html#cb19-2"></a><span class="st">  </span><span class="kw">filter</span>(br_sf, name_pt <span class="op">==</span><span class="st"> &quot;Rio Grande do Sul&quot;</span> <span class="op">|</span></span>
+<span id="cb19-3"><a href="adding-points.html#cb19-3"></a><span class="st">           </span>name_pt <span class="op">==</span><span class="st"> &quot;Paraná&quot;</span>)</span>
+<span id="cb19-4"><a href="adding-points.html#cb19-4"></a></span>
+<span id="cb19-5"><a href="adding-points.html#cb19-5"></a>rgs_pa</span></code></pre></div>
+<pre><code>## Simple feature collection with 2 features and 83 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: -57.6117 ymin: -33.74228 xmax: -48.03249 ymax: -22.52173
+## epsg (SRID):    4326
+## proj4string:    +proj=longlat +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +no_defs
+##           featurecla scalerank adm1_code diss_me iso_3166_2 wikipedia
+## 1 Admin-1 scale rank         2   BRA-612     612      BR-RS      &lt;NA&gt;
+## 2 Admin-1 scale rank         2   BRA-613     613      BR-PR      &lt;NA&gt;
+##   iso_a2 adm0_sr              name name_alt name_local   type type_en
+## 1     BR       1 Rio Grande do Sul     &lt;NA&gt;       &lt;NA&gt; Estado   State
+## 2     BR       1            Paraná     &lt;NA&gt;       &lt;NA&gt; Estado   State
+##   code_local code_hasc note hasc_maybe region region_cod provnum_ne
+## 1       &lt;NA&gt;     BR.RS &lt;NA&gt;       &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;         12
+## 2       &lt;NA&gt;     BR.PR &lt;NA&gt;       &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;         13
+##   gadm_level check_me datarank abbrev postal area_sqkm sameascity
+## 1          1       20        1    Rio     RS         0         NA
+## 2          1       20        1 Paraná     PR         0         NA
+##   labelrank name_len mapcolor9 mapcolor13 fips fips_alt  woe_id
+## 1         2       17         5          7 BR23     &lt;NA&gt; 2344864
+## 2         2        6         5          7 BR18     &lt;NA&gt; 2344859
+##                       woe_label          woe_name latitude longitude
+## 1 Rio Grande do Sul, BR, Brazil Rio Grande do Sul -29.7277  -53.6560
+## 2            Parana, BR, Brazil            Paraná -24.6618  -51.3228
+##   sov_a3 adm0_a3 adm0_label  admin geonunit gu_a3   gn_id
+## 1    BRA     BRA          2 Brazil   Brazil   BRA 3451133
+## 2    BRA     BRA          2 Brazil   Brazil   BRA 3455077
+##                       gn_name  gns_id                     gns_name
+## 1 Estado do Rio Grande do Sul -666687 Rio Grande do Sul, Estado do
+## 2            Estado do Parana -659430            Parana, Estado do
+##   gn_level gn_region gn_a1_code region_sub sub_code gns_level gns_lang
+## 1        1      &lt;NA&gt;      BR.23       &lt;NA&gt;     &lt;NA&gt;         1      kor
+## 2        1      &lt;NA&gt;      BR.18       &lt;NA&gt;     &lt;NA&gt;         1      por
+##   gns_adm1 gns_region min_label max_label min_zoom wikidataid name_ar
+## 1     BR23       &lt;NA&gt;       3.7       8.5        3     Q40030    &lt;NA&gt;
+## 2     BR18       &lt;NA&gt;       3.7       8.5        3     Q15499    &lt;NA&gt;
+##   name_bn           name_de           name_en            name_es
+## 1    &lt;NA&gt; Rio Grande do Sul Rio Grande do Sul Río Grande del Sur
+## 2    &lt;NA&gt;            Paraná            Paraná             Paraná
+##             name_fr name_el name_hi            name_hu           name_id
+## 1 Rio Grande do Sul    &lt;NA&gt;    &lt;NA&gt; Río Grande del Sur Rio Grande do Sul
+## 2            Paraná    &lt;NA&gt;    &lt;NA&gt;             Paraná            Paraná
+##             name_it name_ja name_ko           name_nl           name_pl
+## 1 Rio Grande do Sul    &lt;NA&gt;    &lt;NA&gt; Rio Grande do Sul Rio Grande do Sul
+## 2            Paraná    &lt;NA&gt;    &lt;NA&gt;            Paraná            Parana
+##             name_pt name_ru           name_sv           name_tr
+## 1 Rio Grande do Sul    &lt;NA&gt; Rio Grande do Sul Rio Grande do Sul
+## 2            Paraná    &lt;NA&gt;            Paraná            Paraná
+##             name_vi name_zh      ne_id                       geometry
+## 1 Rio Grande do Sul    &lt;NA&gt; 1159307911 MULTIPOLYGON (((-56.90637 -...
+## 2            Paraná    &lt;NA&gt; 1159307913 MULTIPOLYGON (((-54.35843 -...</code></pre>
+<p>Using the new object with only Rio Grande do Sul and Paraná, create a new map with the soybean rust observations.
+Note the use of the data call in both <code>geom_sf()</code> and <code>geom_point()</code> so that it is possible to mix different data sources in the same map.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="adding-points.html#cb21-1"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb21-2"><a href="adding-points.html#cb21-2"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> rgs_pa, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
+<span id="cb21-3"><a href="adding-points.html#cb21-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sbr, <span class="kw">aes</span>(<span class="dt">x =</span> lon, <span class="dt">y =</span> lat)) <span class="op">+</span></span>
+<span id="cb21-4"><a href="adding-points.html#cb21-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb21-5"><a href="adding-points.html#cb21-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb21-6"><a href="adding-points.html#cb21-6"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<p><img src="mapping_with_ggplot2_files/figure-html/plot-sbr-states2-1.png" width="672" /></p>
+<p>To show more information about the soybean rust outbreaks, we can use colours in the points.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="adding-points.html#cb22-1"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb22-2"><a href="adding-points.html#cb22-2"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> rgs_pa, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
+<span id="cb22-3"><a href="adding-points.html#cb22-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sbr, <span class="kw">aes</span>(<span class="dt">x =</span> lon, <span class="dt">y =</span> lat, <span class="dt">colour =</span> month)) <span class="op">+</span></span>
+<span id="cb22-4"><a href="adding-points.html#cb22-4"></a><span class="st">  </span><span class="kw">scale_color_viridis_d</span>(<span class="st">&quot;First</span><span class="ch">\n</span><span class="st">Report&quot;</span>) <span class="op">+</span></span>
+<span id="cb22-5"><a href="adding-points.html#cb22-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb22-6"><a href="adding-points.html#cb22-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb22-7"><a href="adding-points.html#cb22-7"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<p><img src="mapping_with_ggplot2_files/figure-html/plot-sbr-states3-1.png" width="672" /></p>
+<p>That is more useful, but we have multiple years and the months are not in order.
+To correct this, we will modify the <code>sbr</code> object and make the “month” column a factor and reorder it to follow the soybean growing season.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="adding-points.html#cb23-1"></a>sbr &lt;-</span>
+<span id="cb23-2"><a href="adding-points.html#cb23-2"></a><span class="st">  </span>sbr <span class="op">%&gt;%</span></span>
+<span id="cb23-3"><a href="adding-points.html#cb23-3"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">as_factor</span>(month)) <span class="op">%&gt;%</span></span>
+<span id="cb23-4"><a href="adding-points.html#cb23-4"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">fct_relevel</span>(month, <span class="kw">c</span>(<span class="st">&quot;Nov&quot;</span>, <span class="st">&quot;Dec&quot;</span>, <span class="st">&quot;Jan&quot;</span>, <span class="st">&quot;Feb&quot;</span>, <span class="st">&quot;Mar&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="adding-points.html#cb24-1"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb24-2"><a href="adding-points.html#cb24-2"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> rgs_pa, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
+<span id="cb24-3"><a href="adding-points.html#cb24-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sbr, <span class="kw">aes</span>(<span class="dt">x =</span> lon, <span class="dt">y =</span> lat, <span class="dt">colour =</span> month)) <span class="op">+</span></span>
+<span id="cb24-4"><a href="adding-points.html#cb24-4"></a><span class="st">  </span><span class="kw">scale_color_viridis_d</span>(<span class="st">&quot;First</span><span class="ch">\n</span><span class="st">Report&quot;</span>) <span class="op">+</span></span>
+<span id="cb24-5"><a href="adding-points.html#cb24-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb24-6"><a href="adding-points.html#cb24-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb24-7"><a href="adding-points.html#cb24-7"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<p><img src="mapping_with_ggplot2_files/figure-html/plot-sbr-states4-1.png" width="672" /></p>
+<p>Now plotting the data again shows that the months are in the proper order but there are multiple years.
+We can use faceting to make the maps more clear and see patterns.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="adding-points.html#cb25-1"></a><span class="kw">library</span>(lubridate)</span>
+<span id="cb25-2"><a href="adding-points.html#cb25-2"></a></span>
+<span id="cb25-3"><a href="adding-points.html#cb25-3"></a>sbr &lt;-<span class="st"> </span></span>
+<span id="cb25-4"><a href="adding-points.html#cb25-4"></a><span class="st">  </span>sbr <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb25-5"><a href="adding-points.html#cb25-5"></a><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year =</span> <span class="kw">year</span>(date_report))</span>
+<span id="cb25-6"><a href="adding-points.html#cb25-6"></a></span>
+<span id="cb25-7"><a href="adding-points.html#cb25-7"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb25-8"><a href="adding-points.html#cb25-8"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> rgs_pa, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
+<span id="cb25-9"><a href="adding-points.html#cb25-9"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> sbr, <span class="kw">aes</span>(<span class="dt">x =</span> lon, <span class="dt">y =</span> lat, <span class="dt">colour =</span> month)) <span class="op">+</span></span>
+<span id="cb25-10"><a href="adding-points.html#cb25-10"></a><span class="st">  </span><span class="kw">scale_color_viridis_d</span>(<span class="st">&quot;First</span><span class="ch">\n</span><span class="st">Report&quot;</span>) <span class="op">+</span></span>
+<span id="cb25-11"><a href="adding-points.html#cb25-11"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb25-12"><a href="adding-points.html#cb25-12"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb25-13"><a href="adding-points.html#cb25-13"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb25-14"><a href="adding-points.html#cb25-14"></a><span class="st">  </span><span class="kw">facet_wrap</span>(. <span class="op">~</span><span class="st"> </span>year)</span></code></pre></div>
+<p><img src="mapping_with_ggplot2_files/figure-html/plot-sbr-states5-1.png" width="672" /></p>
+</div>
+</div>
+<div id="your-turn-1" class="section level2">
+<h2><span class="header-section-number">3.3</span> Your Turn</h2>
+<blockquote>
+<ul>
+<li><strong>Create a figure such that each state/year combination is represented in its own facet</strong> Why might this not be idea?</li>
+<li><strong>Create individual figures for each state faceted by year with month as the point colour</strong></li>
+</ul>
+</blockquote>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="creating-country-and-state-level-maps.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="working-with-raster-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["mapping_with_ggplot2.pdf", "mapping_with_ggplot2.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

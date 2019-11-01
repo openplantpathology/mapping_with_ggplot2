@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Working with Raster Data | An Easy Introduction to Mapping in R with ggplot2</title>
+  <meta name="description" content="This book contains examples of how to make simple maps in ggplot2." />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Working with Raster Data | An Easy Introduction to Mapping in R with ggplot2" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book contains examples of how to make simple maps in ggplot2." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Working with Raster Data | An Easy Introduction to Mapping in R with ggplot2" />
+  
+  <meta name="twitter:description" content="This book contains examples of how to make simple maps in ggplot2." />
+  
+
+<meta name="author" content="Adam H. Sparks" />
+
+
+<meta name="date" content="2019-11-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="adding-points.html"/>
+<link rel="next" href="wrap-up.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">An Easy Introduction to Mapping in R with ggplot2</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#what-you-will-learn"><i class="fa fa-check"></i><b>0.1</b> What you will learn</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#what-you-will-use"><i class="fa fa-check"></i><b>0.2</b> What you will use</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#colophon"><i class="fa fa-check"></i><b>0.3</b> Colophon</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Working with Spatial Data in R</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#forms-of-spatial-data"><i class="fa fa-check"></i><b>1.1</b> Forms of Spatial Data</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#spatial-packages"><i class="fa fa-check"></i><b>1.2</b> Spatial Packages</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#exercises"><i class="fa fa-check"></i><b>1.3</b> Exercises</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#install-spatial-packages"><i class="fa fa-check"></i><b>1.3.1</b> Install Spatial Packages</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html"><i class="fa fa-check"></i><b>2</b> Creating Country and State Level Maps</a><ul>
+<li class="chapter" data-level="2.1" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#exercises-1"><i class="fa fa-check"></i><b>2.2</b> Exercises</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#create-country-level-map-of-brazil"><i class="fa fa-check"></i><b>2.2.1</b> Create Country Level Map of Brazil</a></li>
+<li class="chapter" data-level="2.2.2" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#create-maps-of-individual-states"><i class="fa fa-check"></i><b>2.2.2</b> Create Maps of Individual States</a></li>
+<li class="chapter" data-level="2.2.3" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#highlighting-states-within-the-country"><i class="fa fa-check"></i><b>2.2.3</b> Highlighting States Within the Country</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#your-turn"><i class="fa fa-check"></i><b>2.3</b> Your Turn</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="adding-points.html"><a href="adding-points.html"><i class="fa fa-check"></i><b>3</b> Adding Points</a><ul>
+<li class="chapter" data-level="3.1" data-path="adding-points.html"><a href="adding-points.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="adding-points.html"><a href="adding-points.html#exercises-2"><i class="fa fa-check"></i><b>3.2</b> Exercises</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="adding-points.html"><a href="adding-points.html#import-soybean-rust-observations"><i class="fa fa-check"></i><b>3.2.1</b> Import Soybean Rust Observations</a></li>
+<li class="chapter" data-level="3.2.2" data-path="adding-points.html"><a href="adding-points.html#add-soybean-rust-observations-to-br-ggplot2-object"><i class="fa fa-check"></i><b>3.2.2</b> Add Soybean Rust Observations to <code>br</code> ggplot2 Object</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="adding-points.html"><a href="adding-points.html#your-turn-1"><i class="fa fa-check"></i><b>3.3</b> Your Turn</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html"><i class="fa fa-check"></i><b>4</b> Working with Raster Data</a><ul>
+<li class="chapter" data-level="4.1" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#exercises-3"><i class="fa fa-check"></i><b>4.2</b> Exercises</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#download-climate-data-from-worldclim"><i class="fa fa-check"></i><b>4.2.1</b> Download climate data from Worldclim</a></li>
+<li class="chapter" data-level="4.2.2" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#convert-temperature-data"><i class="fa fa-check"></i><b>4.2.2</b> Convert temperature data</a></li>
+<li class="chapter" data-level="4.2.3" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#create-a-data-set-for-january"><i class="fa fa-check"></i><b>4.2.3</b> Create a data set for January</a></li>
+<li class="chapter" data-level="4.2.4" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#create-data-frame-for-ggplot2"><i class="fa fa-check"></i><b>4.2.4</b> Create data frame for ggplot2</a></li>
+<li class="chapter" data-level="4.2.5" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#plot-global-minimum-temperatures"><i class="fa fa-check"></i><b>4.2.5</b> Plot global minimum temperatures</a></li>
+<li class="chapter" data-level="4.2.6" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#brazil-minimum-temperature"><i class="fa fa-check"></i><b>4.2.6</b> Brazil minimum temperature</a></li>
+<li class="chapter" data-level="4.2.7" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#plot-brazil-minimum-temperature"><i class="fa fa-check"></i><b>4.2.7</b> Plot Brazil minimum temperature</a></li>
+<li class="chapter" data-level="4.2.8" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#adding-state-outlines"><i class="fa fa-check"></i><b>4.2.8</b> Adding state outlines</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#your-turn-2"><i class="fa fa-check"></i><b>4.3</b> Your turn</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="wrap-up.html"><a href="wrap-up.html"><i class="fa fa-check"></i><b>5</b> Wrap Up</a><ul>
+<li class="chapter" data-level="5.1" data-path="wrap-up.html"><a href="wrap-up.html#further-reading"><i class="fa fa-check"></i><b>5.1</b> Further Reading</a></li>
+<li class="chapter" data-level="5.2" data-path="wrap-up.html"><a href="wrap-up.html#references"><i class="fa fa-check"></i><b>5.2</b> References</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/adamhsparks/ggplot2_mapping" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An Easy Introduction to Mapping in R with ggplot2</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="working-with-raster-data" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Working with Raster Data</h1>
+<div id="introduction-3" class="section level2">
+<h2><span class="header-section-number">4.1</span> Introduction</h2>
+</div>
+<div id="exercises-3" class="section level2">
+<h2><span class="header-section-number">4.2</span> Exercises</h2>
+<div id="download-climate-data-from-worldclim" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Download climate data from Worldclim</h3>
+<p><em>raster</em> has functionality built-in to download files and import them automatically to your R session for you.
+We will use this functionality to get Worldcim data for minimum temperature.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="working-with-raster-data.html#cb26-1"></a><span class="kw">library</span>(raster)</span>
+<span id="cb26-2"><a href="working-with-raster-data.html#cb26-2"></a></span>
+<span id="cb26-3"><a href="working-with-raster-data.html#cb26-3"></a>tmin &lt;-<span class="st"> </span><span class="kw">getData</span>(<span class="st">&quot;worldclim&quot;</span>, <span class="dt">var =</span> <span class="st">&quot;tmin&quot;</span>, <span class="dt">res =</span> <span class="dv">10</span>)</span>
+<span id="cb26-4"><a href="working-with-raster-data.html#cb26-4"></a></span>
+<span id="cb26-5"><a href="working-with-raster-data.html#cb26-5"></a><span class="kw">summary</span>(tmin)</span></code></pre></div>
+<pre><code>##           tmin1   tmin2   tmin3   tmin4   tmin5   tmin6   tmin7   tmin8
+## Min.       -536    -518    -464    -376    -223    -146    -144    -150
+## 1st Qu.    -269    -254    -195    -100     -19      37      61      53
+## Median      -72     -59     -18      32      72      98     119     109
+## 3rd Qu.     145     154     163     165     170     183     192     190
+## Max.        263     260     259     272     289     302     308     309
+## NA&#39;s    1356387 1356387 1356387 1356387 1356387 1356387 1356387 1356387
+##           tmin9  tmin10  tmin11  tmin12
+## Min.       -190    -300    -443    -515
+## 1st Qu.       9     -64    -164    -234
+## Median       81      38      -4     -47
+## 3rd Qu.     182     171     156     144
+## Max.        293     268     267     267
+## NA&#39;s    1356387 1356387 1356387 1356504</code></pre>
+<p>We can see that the <code>tmin</code> object is a <em>raster</em> stack.
+In other words, this stack has several layers of data, one for each month plus the annual average minimum temperature.</p>
+</div>
+<div id="convert-temperature-data" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Convert temperature data</h3>
+<p>Worldclim temperature data need to be divided by 10 to convert back to degrees Celcius.
+This will convert all of the layers.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="working-with-raster-data.html#cb28-1"></a>tmin &lt;-<span class="st"> </span>tmin<span class="op">/</span><span class="dv">10</span></span></code></pre></div>
+</div>
+<div id="create-a-data-set-for-january" class="section level3">
+<h3><span class="header-section-number">4.2.3</span> Create a data set for January</h3>
+<p>We can create a new object for just the minimum temperature in January.
+Using the <code>[[]]</code> is called indexing, it tells R to take the first object in the stack.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="working-with-raster-data.html#cb29-1"></a>tmin1 &lt;-<span class="st"> </span>tmin[[<span class="dv">1</span>]]</span>
+<span id="cb29-2"><a href="working-with-raster-data.html#cb29-2"></a><span class="kw">class</span>(tmin1)</span></code></pre></div>
+<pre><code>## [1] &quot;RasterLayer&quot;
+## attr(,&quot;package&quot;)
+## [1] &quot;raster&quot;</code></pre>
+</div>
+<div id="create-data-frame-for-ggplot2" class="section level3">
+<h3><span class="header-section-number">4.2.4</span> Create data frame for ggplot2</h3>
+<p>However, the data are in a format that <em>ggplot2</em> still will not understand, a <code>raster</code> object.
+We need to convert it to a data frame.
+<em>raster</em> has a built-in function to do this for us.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="working-with-raster-data.html#cb31-1"></a>tmin1_df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(tmin1, <span class="dt">xy =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb31-2"><a href="working-with-raster-data.html#cb31-2"></a><span class="kw">class</span>(tmin1_df)</span></code></pre></div>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<p>Now we we are ready to plot the data in <em>ggplot2</em>.</p>
+</div>
+<div id="plot-global-minimum-temperatures" class="section level3">
+<h3><span class="header-section-number">4.2.5</span> Plot global minimum temperatures</h3>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="working-with-raster-data.html#cb33-1"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb33-2"><a href="working-with-raster-data.html#cb33-2"></a><span class="st">    </span><span class="kw">geom_raster</span>(<span class="dt">data =</span> tmin1_df, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">fill =</span> tmin1)) <span class="op">+</span></span>
+<span id="cb33-3"><a href="working-with-raster-data.html#cb33-3"></a><span class="st">    </span><span class="kw">scale_fill_viridis_c</span>(<span class="st">&quot;Jan</span><span class="ch">\n</span><span class="st">Min</span><span class="ch">\n</span><span class="st">T&quot;</span>, <span class="dt">na.value =</span> <span class="ot">NA</span>) <span class="op">+</span></span>
+<span id="cb33-4"><a href="working-with-raster-data.html#cb33-4"></a><span class="st">    </span><span class="kw">coord_quickmap</span>()</span></code></pre></div>
+<pre><code>## Warning: Removed 1359281 rows containing missing values (geom_raster).</code></pre>
+<p><img src="mapping_with_ggplot2_files/figure-html/plot-tmin1.1-1.png" width="672" /></p>
+</div>
+<div id="brazil-minimum-temperature" class="section level3">
+<h3><span class="header-section-number">4.2.6</span> Brazil minimum temperature</h3>
+<p>If we wish to plot only temperatures for Brazil, we need to perform some GIS operations with the <em>raster</em> object, a bit different than the <em>sf</em> in previous examples.
+Work is being done to make raster files in R work as seamlessly, but for right now it is not possible yet.</p>
+<p>The first step is to crop the raster file, removing all data that is not Brazil.
+We will use the <code>br_sf</code> object to instruct <em>raster</em> where our data begins and ends.
+Using the base <code>plot()</code> method, quickly explore the new object, <code>brazil</code> that is created.</p>
+<div id="crop-operation" class="section level4">
+<h4><span class="header-section-number">4.2.6.1</span> Crop operation</h4>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="working-with-raster-data.html#cb35-1"></a>brazil &lt;-<span class="st"> </span><span class="kw">crop</span>(tmin1, br_sf)</span>
+<span id="cb35-2"><a href="working-with-raster-data.html#cb35-2"></a></span>
+<span id="cb35-3"><a href="working-with-raster-data.html#cb35-3"></a><span class="kw">plot</span>(brazil)</span></code></pre></div>
+<p><img src="mapping_with_ggplot2_files/figure-html/crop-1.png" width="672" /></p>
+</div>
+<div id="mask-operation" class="section level4">
+<h4><span class="header-section-number">4.2.6.2</span> Mask operation</h4>
+<p>The <code>brazil</code> object is not only Brazil but also bits of other countries nearby.
+To fix this we will now use <code>mask()</code> from the <em>raster</em> package to remove data that are outside the outline of Brazil.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="working-with-raster-data.html#cb36-1"></a>brazil &lt;-<span class="st"> </span><span class="kw">mask</span>(brazil, br_sf)</span>
+<span id="cb36-2"><a href="working-with-raster-data.html#cb36-2"></a><span class="kw">plot</span>(brazil)</span></code></pre></div>
+<p><img src="mapping_with_ggplot2_files/figure-html/mask-1.png" width="672" /></p>
+<p>Now that we have the data we desire, we can convert it into a <code>data.frame</code> suitable for use in <em>ggplot2</em>.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="working-with-raster-data.html#cb37-1"></a>brazil &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(brazil, <span class="dt">xy =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="plot-brazil-minimum-temperature" class="section level3">
+<h3><span class="header-section-number">4.2.7</span> Plot Brazil minimum temperature</h3>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="working-with-raster-data.html#cb38-1"></a>br_tmin &lt;-</span>
+<span id="cb38-2"><a href="working-with-raster-data.html#cb38-2"></a><span class="st">  </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb38-3"><a href="working-with-raster-data.html#cb38-3"></a><span class="st">  </span><span class="kw">geom_raster</span>(<span class="dt">data =</span> brazil, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">fill =</span> tmin1)) <span class="op">+</span></span>
+<span id="cb38-4"><a href="working-with-raster-data.html#cb38-4"></a><span class="st">  </span><span class="kw">scale_fill_viridis_c</span>(<span class="st">&quot;Jan Min</span><span class="ch">\n</span><span class="st">T (°C)&quot;</span>, <span class="dt">na.value =</span> <span class="ot">NA</span>) <span class="op">+</span></span>
+<span id="cb38-5"><a href="working-with-raster-data.html#cb38-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb38-6"><a href="working-with-raster-data.html#cb38-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb38-7"><a href="working-with-raster-data.html#cb38-7"></a><span class="st">  </span><span class="kw">coord_quickmap</span>()</span></code></pre></div>
+</div>
+<div id="adding-state-outlines" class="section level3">
+<h3><span class="header-section-number">4.2.8</span> Adding state outlines</h3>
+<p>We can add the state outlines on top of the minimum temperatures as a new layer.
+Using the <code>br_sf</code> object and <code>geom_sf()</code> will add state outlines. However, <code>fill</code> must be set to <code>NA</code> or the polygons will be filled with default grey.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="working-with-raster-data.html#cb39-1"></a>br_tmin <span class="op">+</span></span>
+<span id="cb39-2"><a href="working-with-raster-data.html#cb39-2"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> br_sf,</span>
+<span id="cb39-3"><a href="working-with-raster-data.html#cb39-3"></a>          <span class="dt">fill =</span> <span class="ot">NA</span>,</span>
+<span id="cb39-4"><a href="working-with-raster-data.html#cb39-4"></a>          <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></span>
+<span id="cb39-5"><a href="working-with-raster-data.html#cb39-5"></a><span class="st">  </span><span class="kw">coord_sf</span>()</span></code></pre></div>
+<p><img src="mapping_with_ggplot2_files/figure-html/tmin-states-1.png" width="672" /></p>
+</div>
+</div>
+<div id="your-turn-2" class="section level2">
+<h2><span class="header-section-number">4.3</span> Your turn</h2>
+<blockquote>
+<ul>
+<li><strong>Create a map of Minas Gerais’ minimum temperature for December</strong></li>
+</ul>
+</blockquote>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="adding-points.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="wrap-up.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["mapping_with_ggplot2.pdf", "mapping_with_ggplot2.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

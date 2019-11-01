@@ -1,0 +1,21 @@
+
+# Wrap Up
+
+We have installed packages necessary to create maps in R using _ggplot2_ and practice examples using vector data, our own point data and raster data.
+
+We saw how to incorporate different types of data in one map and how to create maps of only the region of interest.
+
+
+## Learning more
+
+To learn more about how to make maps using _ggplot2_ and R, I recommend these articles. There are many others available, so have a look around and see what you can find!
+
+[Introduction to Geospatial Raster and Vector Data with R](https://datacarpentry.org/r-raster-vector-geospatial/)
+
+[Beautiful thematic maps with ggplot2 (only)](https://timogrossenbacher.ch/2016/12/beautiful-thematic-maps-with-ggplot2-only/)
+
+[Bivariate maps with ggplot2 and sf](https://timogrossenbacher.ch/2019/04/bivariate-maps-with-ggplot2-and-sf/)
+
+[Making maps with R](https://geocompr.robinlovelace.net/adv-map.html)
+
+## References

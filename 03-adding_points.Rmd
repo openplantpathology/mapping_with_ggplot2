@@ -1,0 +1,111 @@
+# Adding Points
+
+## Introduction
+
+In many cases we may have a data set of interest that has georeferenced data (lat, lon values).
+Using the soybean rust observation data, add the points to the map of Brazil.
+
+## Exercises
+
+### Import Soybean Rust Observations
+
+We will load the _tidyverse_ package for these next steps.
+
+```{r import-sbr-data, message=FALSE}
+library(tidyverse)
+
+sbr <- read_csv("SBR-BR.csv")
+
+glimpse(sbr)
+```
+
+### Add Soybean Rust Observations to `br` ggplot2 Object
+
+Using `geom_point()` we can add points from the CSV file of observation data to the map of Brazil that we have already created.
+
+```{r add-points-map}
+br +
+  geom_point(data = sbr, aes(x = lon, y = lat))
+```
+
+That is not too clear. Perhaps it would be better to just plot the two states, rather than the whole country.
+Filter the `br_sf` object to create a new object of only these two states.
+
+```{r plot-sbr-states1}
+rgs_pa <-
+  filter(br_sf, name_pt == "Rio Grande do Sul" |
+           name_pt == "Paraná")
+
+rgs_pa
+```
+
+Using the new object with only Rio Grande do Sul and Paraná, create a new map with the soybean rust observations.
+Note the use of the data call in both `geom_sf()` and `geom_point()` so that it is possible to mix different data sources in the same map.
+
+```{r plot-sbr-states2}
+ggplot() +
+  geom_sf(data = rgs_pa, fill = "white") +
+  geom_point(data = sbr, aes(x = lon, y = lat)) +
+  xlab("Longitude") +
+  ylab("Latitude") +
+  theme_bw()
+```
+
+To show more information about the soybean rust outbreaks, we can use colours in the points.
+
+```{r plot-sbr-states3}
+ggplot() +
+  geom_sf(data = rgs_pa, fill = "white") +
+  geom_point(data = sbr, aes(x = lon, y = lat, colour = month)) +
+  scale_color_viridis_d("First\nReport") +
+  xlab("Longitude") +
+  ylab("Latitude") +
+  theme_bw()
+```
+
+That is more useful, but we have multiple years and the months are not in order.
+To correct this, we will modify the `sbr` object and make the "month" column a factor and reorder it to follow the soybean growing season.
+
+```{r sbr-year-month}
+sbr <-
+  sbr %>%
+  mutate(month = as_factor(month)) %>%
+  mutate(month = fct_relevel(month, c("Nov", "Dec", "Jan", "Feb", "Mar")))
+
+```
+
+
+```{r plot-sbr-states4}
+ggplot() +
+  geom_sf(data = rgs_pa, fill = "white") +
+  geom_point(data = sbr, aes(x = lon, y = lat, colour = month)) +
+  scale_color_viridis_d("First\nReport") +
+  xlab("Longitude") +
+  ylab("Latitude") +
+  theme_bw()
+```
+
+Now plotting the data again shows that the months are in the proper order but there are multiple years.
+We can use faceting to make the maps more clear and see patterns.
+
+```{r plot-sbr-states5}
+library(lubridate)
+
+sbr <- 
+  sbr %>% 
+  mutate(year = year(date_report))
+
+ggplot() +
+  geom_sf(data = rgs_pa, fill = "white") +
+  geom_point(data = sbr, aes(x = lon, y = lat, colour = month)) +
+  scale_color_viridis_d("First\nReport") +
+  xlab("Longitude") +
+  ylab("Latitude") +
+  theme_bw() +
+  facet_wrap(. ~ year)
+```
+
+## Your Turn
+
+> * **Create a figure such that each state/year combination is represented in its own facet** Why might this not be idea?
+> * **Create individual figures for each state faceted by year with month as the point colour**

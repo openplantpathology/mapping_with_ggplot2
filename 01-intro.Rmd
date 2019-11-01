@@ -1,0 +1,47 @@
+# Working with Spatial Data in R {#intro}
+
+## Forms of Spatial Data
+
+Spatial data comes in two basic forms, raster (gridded) and vector (points, lines and polygons).
+
+Raster data are often used to represent continuous variables, _e.g._ temperature, rainfall  or elevation. Whereas vector data are used to represent sampling locations, weather station locations (and data at that point), roads, state or national outlines or other regions that may be natural or manufactured.
+
+Understanding how these data differ is important to being able to use them in maps in R.
+
+## Spatial Packages
+
+Spatial data has its own unique properties. Packages that are commonly used with spatial data in R include.
+
+* [_raster_](https://cran.r-project.org/web/packages/raster/index.html) [@raster], 
+* [_sf_](https://cran.r-project.org/web/packages/raster/index.html) [@sf], 
+* [_rnaturalearth_](https://cran.r-project.org/web/packages/rnaturalearth/README.html) [@rnaturalearth], and
+* [_rnaturalearthdata_](https://cran.r-project.org/web/packages/rnaturalearthdata/index.html)
+
+The _raster_ package is used to handle raster data files but also offers capabilities to download and import other data including country-level outlines ([GADM](https://gadm.org/)), elevation (SRTM data) and bioclimatic variables from [Worldclim](https://www.worldclim.org/).
+
+_sf_ is used to handle vector-format files and _ggplot2_ now offers `geom_sf()` for easy plotting of _sf_ objects.
+
+_rnaturalearth_ and _rnaturalearthdata_ facilitate mapping using data from [http://www.naturalearthdata.com/](http://www.naturalearthdata.com/).
+
+You may also want to visit [https://rspatial.org](https://rspatial.org/) for more packages, tutorials and information.
+
+## Exercises
+
+### Install Spatial Packages
+
+Install the packages necessary for working with spatial data in R. _This will take a few moments to complete._
+
+```{r install-spatial, eval=FALSE}
+install.packages(c("raster", "sf", "rnaturalearth", "rnaturalearthdata"))
+```
+
+Once the main packages are installed, the second step is to install the _rnaturalearthhires_ package as well.
+
+Answer `1` to download and install the necessary data. Again, this will also take some time.
+
+```{r install-spatial-2, eval=FALSE}
+library(rnaturalearth)
+install_rnaturalearthhires()
+```
+
+Now we are ready to make some maps!

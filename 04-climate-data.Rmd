@@ -1,0 +1,128 @@
+# Working with Raster Data
+
+## Introduction
+
+## Exercises
+
+### Download climate data from Worldclim
+
+_raster_ has functionality built-in to download files and import them automatically to your R session for you.
+We will use this functionality to get Worldclim data for minimum temperature.
+
+```{r wc-download, warning=FALSE, message=FALSE}
+library(raster)
+
+tmin <- getData("worldclim", var = "tmin", res = 10)
+
+summary(tmin)
+```
+
+We can see that the `tmin` object is a _raster_ stack.
+In other words, this stack has several layers of data, one for each month plus the annual average minimum temperature.
+
+### Convert temperature data
+
+Worldclim temperature data need to be divided by 10 to convert back to degrees Celsius.
+This will convert all of the layers.
+
+```{r convert-to-C}
+tmin <- tmin/10
+```
+
+### Create a data set for January
+
+We can create a new object for just the minimum temperature in January.
+Using the `[[]]` is called indexing, it tells R to take the first object in the stack.
+
+```{r create-jan-raster}
+tmin1 <- tmin[[1]]
+class(tmin1)
+```
+
+### Create data frame for ggplot2
+
+However, the data are in a format that _ggplot2_ still will not understand, a `raster` object.
+We need to convert it to a data frame.
+_raster_ has a built-in function to do this for us.
+
+```{r create-jan-df}
+tmin1_df <- as.data.frame(tmin1, xy = TRUE)
+class(tmin1_df)
+```
+
+Now we we are ready to plot the data in _ggplot2_.
+
+### Plot global minimum temperatures
+
+```{r plot-tmin1.1}
+ggplot() +
+    geom_raster(data = tmin1_df, aes(x = x, y = y, fill = tmin1)) +
+    scale_fill_viridis_c("Jan\nMin\nT", na.value = NA) +
+    coord_quickmap()
+```
+
+### Brazil minimum temperature
+
+If we wish to plot only temperatures for Brazil, we need to perform some GIS operations with the _raster_ object, a bit different than the _sf_ in previous examples.
+Work is being done to make raster files in R work as seamlessly, but for right now it is not possible yet.
+
+The first step is to crop the raster file, removing all data that is not Brazil.
+We will use the `br_sf` object to instruct _raster_ where our data begins and ends.
+Using the base `plot()` method, quickly explore the new object, `brazil` that is created.
+
+#### Crop operation
+
+```{r crop}
+brazil <- crop(tmin1, br_sf)
+
+plot(brazil)
+```
+
+#### Mask operation
+
+The `brazil` object is not only Brazil but also bits of other countries nearby.
+To fix this we will now use `mask()` from the _raster_ package to remove data that are outside the outline of Brazil.
+
+```{r mask}
+brazil <- mask(brazil, br_sf)
+plot(brazil)
+```
+
+Now that we have the data we desire, we can convert it into a `data.frame` suitable for use in _ggplot2_.
+
+```{r brazil-tmin1-df}
+brazil <- as.data.frame(brazil, xy = TRUE)
+```
+
+### Plot Brazil minimum temperature
+
+```{r ggplot-brazil-tmin1-df}
+br_tmin <-
+  ggplot() +
+  geom_raster(data = brazil, aes(x = x, y = y, fill = tmin1)) +
+  scale_fill_viridis_c("Jan Min\nT (°C)", na.value = NA) +
+  xlab("Longitude") +
+  ylab("Latitude") +
+  coord_quickmap()
+```
+
+### Adding state outlines
+
+We can add the state outlines on top of the minimum temperatures as a new layer.
+Using the `br_sf` object and `geom_sf()` will add state outlines. However, `fill` must be set to `NA` or the polygons will be filled with default grey.
+
+```{r tmin-states, message=FALSE, warning=FALSE}
+br_tmin +
+  geom_sf(data = br_sf,
+          fill = NA,
+          colour = "black") +
+  coord_sf()
+```
+
+## Your turn
+
+> * **Create a map of Minas Gerais' minimum temperature for December**
+
+```{r cleanup, include=FALSE, echo=FALSE}
+unlink("wc10", recursive = TRUE)
+```

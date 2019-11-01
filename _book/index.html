@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>An Easy Introduction to Mapping in R with ggplot2</title>
+  <meta name="description" content="This book contains examples of how to make simple maps in ggplot2." />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="An Easy Introduction to Mapping in R with ggplot2" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book contains examples of how to make simple maps in ggplot2." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="An Easy Introduction to Mapping in R with ggplot2" />
+  
+  <meta name="twitter:description" content="This book contains examples of how to make simple maps in ggplot2." />
+  
+
+<meta name="author" content="Adam H. Sparks" />
+
+
+<meta name="date" content="2019-11-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="intro.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">An Easy Introduction to Mapping in R with ggplot2</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#what-you-will-learn"><i class="fa fa-check"></i><b>0.1</b> What you will learn</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#what-you-will-use"><i class="fa fa-check"></i><b>0.2</b> What you will use</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#colophon"><i class="fa fa-check"></i><b>0.3</b> Colophon</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Working with Spatial Data in R</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#forms-of-spatial-data"><i class="fa fa-check"></i><b>1.1</b> Forms of Spatial Data</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#spatial-packages"><i class="fa fa-check"></i><b>1.2</b> Spatial Packages</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#exercises"><i class="fa fa-check"></i><b>1.3</b> Exercises</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#install-spatial-packages"><i class="fa fa-check"></i><b>1.3.1</b> Install Spatial Packages</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html"><i class="fa fa-check"></i><b>2</b> Creating Country and State Level Maps</a><ul>
+<li class="chapter" data-level="2.1" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#exercises-1"><i class="fa fa-check"></i><b>2.2</b> Exercises</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#create-country-level-map-of-brazil"><i class="fa fa-check"></i><b>2.2.1</b> Create Country Level Map of Brazil</a></li>
+<li class="chapter" data-level="2.2.2" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#create-maps-of-individual-states"><i class="fa fa-check"></i><b>2.2.2</b> Create Maps of Individual States</a></li>
+<li class="chapter" data-level="2.2.3" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#highlighting-states-within-the-country"><i class="fa fa-check"></i><b>2.2.3</b> Highlighting States Within the Country</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#your-turn"><i class="fa fa-check"></i><b>2.3</b> Your Turn</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="adding-points.html"><a href="adding-points.html"><i class="fa fa-check"></i><b>3</b> Adding Points</a><ul>
+<li class="chapter" data-level="3.1" data-path="adding-points.html"><a href="adding-points.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="adding-points.html"><a href="adding-points.html#exercises-2"><i class="fa fa-check"></i><b>3.2</b> Exercises</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="adding-points.html"><a href="adding-points.html#import-soybean-rust-observations"><i class="fa fa-check"></i><b>3.2.1</b> Import Soybean Rust Observations</a></li>
+<li class="chapter" data-level="3.2.2" data-path="adding-points.html"><a href="adding-points.html#add-soybean-rust-observations-to-br-ggplot2-object"><i class="fa fa-check"></i><b>3.2.2</b> Add Soybean Rust Observations to <code>br</code> ggplot2 Object</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="adding-points.html"><a href="adding-points.html#your-turn-1"><i class="fa fa-check"></i><b>3.3</b> Your Turn</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html"><i class="fa fa-check"></i><b>4</b> Working with Raster Data</a><ul>
+<li class="chapter" data-level="4.1" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#exercises-3"><i class="fa fa-check"></i><b>4.2</b> Exercises</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#download-climate-data-from-worldclim"><i class="fa fa-check"></i><b>4.2.1</b> Download climate data from Worldclim</a></li>
+<li class="chapter" data-level="4.2.2" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#convert-temperature-data"><i class="fa fa-check"></i><b>4.2.2</b> Convert temperature data</a></li>
+<li class="chapter" data-level="4.2.3" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#create-a-data-set-for-january"><i class="fa fa-check"></i><b>4.2.3</b> Create a data set for January</a></li>
+<li class="chapter" data-level="4.2.4" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#create-data-frame-for-ggplot2"><i class="fa fa-check"></i><b>4.2.4</b> Create data frame for ggplot2</a></li>
+<li class="chapter" data-level="4.2.5" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#plot-global-minimum-temperatures"><i class="fa fa-check"></i><b>4.2.5</b> Plot global minimum temperatures</a></li>
+<li class="chapter" data-level="4.2.6" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#brazil-minimum-temperature"><i class="fa fa-check"></i><b>4.2.6</b> Brazil minimum temperature</a></li>
+<li class="chapter" data-level="4.2.7" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#plot-brazil-minimum-temperature"><i class="fa fa-check"></i><b>4.2.7</b> Plot Brazil minimum temperature</a></li>
+<li class="chapter" data-level="4.2.8" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#adding-state-outlines"><i class="fa fa-check"></i><b>4.2.8</b> Adding state outlines</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#your-turn-2"><i class="fa fa-check"></i><b>4.3</b> Your turn</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="wrap-up.html"><a href="wrap-up.html"><i class="fa fa-check"></i><b>5</b> Wrap Up</a><ul>
+<li class="chapter" data-level="5.1" data-path="wrap-up.html"><a href="wrap-up.html#further-reading"><i class="fa fa-check"></i><b>5.1</b> Further Reading</a></li>
+<li class="chapter" data-level="5.2" data-path="wrap-up.html"><a href="wrap-up.html#references"><i class="fa fa-check"></i><b>5.2</b> References</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/adamhsparks/ggplot2_mapping" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An Easy Introduction to Mapping in R with ggplot2</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">An Easy Introduction to Mapping in R with ggplot2</h1>
+<p class="author"><em>Adam H. Sparks</em></p>
+<p class="date"><em>2019-11-01</em></p>
+</div>
+<div id="introduction" class="section level1 unnumbered">
+<h1>Introduction</h1>
+<p>Creating maps with R often feels like a hard task, but it does not have to be.
+With just a few packages it is possible to create high-quality maps using <em>ggplot2</em>.</p>
+<div id="what-you-will-learn" class="section level2">
+<h2><span class="header-section-number">0.1</span> What you will learn</h2>
+<p>Geographic information systems (GIS) is a field large enough to have whole degree programs dedicated to it and indeed, entire companies (<em>e.g.</em>, <a href="https://www.esri.com/en-us/home">ESRI</a>).
+This short lesson will help you understand enough basic information to find and import data into R to create maps of your own research data.
+It will not teach you all aspects of GIS or how to perform spatial analysis.
+You will learn about the types of data that are used in making maps and how they differ and how you use them differently to create a map that clearly conveys the information you wish to deliver.</p>
+</div>
+<div id="what-you-will-use" class="section level2">
+<h2><span class="header-section-number">0.2</span> What you will use</h2>
+<p>In this workshop we have already introduced the <em>tidyverse</em>, which <em>ggplot2</em> is a part of.
+We will use this to create our maps along with other packages for handling spatial data and importing data.</p>
+</div>
+<div id="colophon" class="section level2">
+<h2><span class="header-section-number">0.3</span> Colophon</h2>
+<p>An online version of this book is available at <a href="http://adamhsparks.github.io" class="uri">http://adamhsparks.github.io</a>… The source of the book is available at <a href="https://github.com/adamhsparks/" class="uri">https://github.com/adamhsparks/</a>…. The book is powered by <a href="https://bookdown.org" class="uri">https://bookdown.org</a> which makes it easy to turn R markdown files into HTML, PDF, and EPUB.</p>
+<p>This book was built with:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1"></a>sessioninfo<span class="op">::</span><span class="kw">session_info</span>()</span></code></pre></div>
+<pre><code>## ─ Session info ──────────────────────────────────────────────────────────
+##  setting  value                       
+##  version  R version 3.6.1 (2019-07-05)
+##  os       Manjaro Linux               
+##  system   x86_64, linux-gnu           
+##  ui       RStudio                     
+##  language (EN)                        
+##  collate  en_AU.UTF-8                 
+##  ctype    en_AU.UTF-8                 
+##  tz       America/Sao_Paulo           
+##  date     2019-11-01                  
+## 
+## ─ Packages ──────────────────────────────────────────────────────────────
+##  package            * version date       lib
+##  assertthat           0.2.1   2019-03-21 [1]
+##  backports            1.1.5   2019-10-02 [1]
+##  bookdown           * 0.14    2019-10-01 [1]
+##  broom                0.5.2   2019-04-07 [1]
+##  cellranger           1.1.0   2016-07-27 [1]
+##  class                7.3-15  2019-01-01 [2]
+##  classInt             0.4-2   2019-10-17 [1]
+##  cli                  1.1.0   2019-03-19 [1]
+##  colorspace           1.4-1   2019-03-18 [1]
+##  crayon               1.3.4   2017-09-16 [1]
+##  DBI                  1.0.0   2018-05-02 [1]
+##  digest               0.6.22  2019-10-21 [1]
+##  dplyr              * 0.8.3   2019-07-04 [1]
+##  e1071                1.7-2   2019-06-05 [1]
+##  ellipsis             0.3.0   2019-09-20 [1]
+##  evaluate             0.14    2019-05-28 [1]
+##  fansi                0.4.0   2018-10-05 [1]
+##  forcats            * 0.4.0   2019-02-17 [1]
+##  generics             0.0.2   2018-11-29 [1]
+##  ggplot2            * 3.2.1   2019-08-10 [1]
+##  glue                 1.3.1   2019-03-12 [1]
+##  gtable               0.3.0   2019-03-25 [1]
+##  haven                2.1.1   2019-07-04 [1]
+##  hms                  0.5.2   2019-10-30 [1]
+##  htmltools            0.4.0   2019-10-04 [1]
+##  httr                 1.4.1   2019-08-05 [1]
+##  jsonlite             1.6     2018-12-07 [1]
+##  KernSmooth           2.23-15 2015-06-29 [2]
+##  knitr                1.25    2019-09-18 [1]
+##  later                1.0.0   2019-10-04 [1]
+##  lattice              0.20-38 2018-11-04 [2]
+##  lazyeval             0.2.2   2019-03-15 [1]
+##  lifecycle            0.1.0   2019-08-01 [1]
+##  lubridate          * 1.7.4   2018-04-11 [1]
+##  magrittr             1.5     2014-11-22 [1]
+##  modelr               0.1.5   2019-08-08 [1]
+##  munsell              0.5.0   2018-06-12 [1]
+##  nlme                 3.1-140 2019-05-12 [2]
+##  pillar               1.4.2   2019-06-29 [1]
+##  pkgconfig            2.0.3   2019-09-22 [1]
+##  purrr              * 0.3.3   2019-10-18 [1]
+##  R6                   2.4.0   2019-02-14 [1]
+##  Rcpp                 1.0.2   2019-07-25 [1]
+##  readr              * 1.3.1   2018-12-21 [1]
+##  readxl               1.3.1   2019-03-13 [1]
+##  rgeos                0.5-2   2019-10-03 [1]
+##  rlang                0.4.1   2019-10-24 [1]
+##  rmarkdown            1.16    2019-10-01 [1]
+##  rnaturalearth      * 0.1.0   2017-03-21 [1]
+##  rnaturalearthhires   0.2.0   2019-11-01 [1]
+##  rsthemes             0.0.2   2019-10-31 [1]
+##  rstudioapi           0.10    2019-03-19 [1]
+##  rvest                0.3.4   2019-05-15 [1]
+##  scales               1.0.0   2018-08-09 [1]
+##  sessioninfo          1.1.1   2018-11-05 [1]
+##  sf                   0.8-0   2019-09-17 [1]
+##  sp                   1.3-1   2018-06-05 [1]
+##  stringi              1.4.3   2019-03-12 [1]
+##  stringr            * 1.4.0   2019-02-10 [1]
+##  tibble             * 2.1.3   2019-06-06 [1]
+##  tidyr              * 1.0.0   2019-09-11 [1]
+##  tidyselect           0.2.5   2018-10-11 [1]
+##  tidyverse          * 1.2.1   2017-11-14 [1]
+##  units                0.6-5   2019-10-08 [1]
+##  utf8                 1.1.4   2018-05-24 [1]
+##  vctrs                0.2.0   2019-07-05 [1]
+##  viridisLite          0.3.0   2018-02-01 [1]
+##  withr                2.1.2   2018-03-15 [1]
+##  xfun                 0.10    2019-10-01 [1]
+##  xml2                 1.2.2   2019-08-09 [1]
+##  yaml                 2.2.0   2018-07-25 [1]
+##  zeallot              0.1.0   2018-01-28 [1]
+##  source                             
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  local                              
+##  Github (gadenbuie/rsthemes@c787f3c)
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+##  CRAN (R 3.6.1)                     
+## 
+## [1] /home/adam/.local/lib/R
+## [2] /usr/lib/R/library</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["mapping_with_ggplot2.pdf", "mapping_with_ggplot2.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

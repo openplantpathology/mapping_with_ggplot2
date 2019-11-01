@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Creating Country and State Level Maps | An Easy Introduction to Mapping in R with ggplot2</title>
+  <meta name="description" content="This book contains examples of how to make simple maps in ggplot2." />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Creating Country and State Level Maps | An Easy Introduction to Mapping in R with ggplot2" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book contains examples of how to make simple maps in ggplot2." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Creating Country and State Level Maps | An Easy Introduction to Mapping in R with ggplot2" />
+  
+  <meta name="twitter:description" content="This book contains examples of how to make simple maps in ggplot2." />
+  
+
+<meta name="author" content="Adam H. Sparks" />
+
+
+<meta name="date" content="2019-11-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="adding-points.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">An Easy Introduction to Mapping in R with ggplot2</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#what-you-will-learn"><i class="fa fa-check"></i><b>0.1</b> What you will learn</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#what-you-will-use"><i class="fa fa-check"></i><b>0.2</b> What you will use</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#colophon"><i class="fa fa-check"></i><b>0.3</b> Colophon</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Working with Spatial Data in R</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#forms-of-spatial-data"><i class="fa fa-check"></i><b>1.1</b> Forms of Spatial Data</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#spatial-packages"><i class="fa fa-check"></i><b>1.2</b> Spatial Packages</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#exercises"><i class="fa fa-check"></i><b>1.3</b> Exercises</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#install-spatial-packages"><i class="fa fa-check"></i><b>1.3.1</b> Install Spatial Packages</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html"><i class="fa fa-check"></i><b>2</b> Creating Country and State Level Maps</a><ul>
+<li class="chapter" data-level="2.1" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#exercises-1"><i class="fa fa-check"></i><b>2.2</b> Exercises</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#create-country-level-map-of-brazil"><i class="fa fa-check"></i><b>2.2.1</b> Create Country Level Map of Brazil</a></li>
+<li class="chapter" data-level="2.2.2" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#create-maps-of-individual-states"><i class="fa fa-check"></i><b>2.2.2</b> Create Maps of Individual States</a></li>
+<li class="chapter" data-level="2.2.3" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#highlighting-states-within-the-country"><i class="fa fa-check"></i><b>2.2.3</b> Highlighting States Within the Country</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#your-turn"><i class="fa fa-check"></i><b>2.3</b> Your Turn</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="adding-points.html"><a href="adding-points.html"><i class="fa fa-check"></i><b>3</b> Adding Points</a><ul>
+<li class="chapter" data-level="3.1" data-path="adding-points.html"><a href="adding-points.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="adding-points.html"><a href="adding-points.html#exercises-2"><i class="fa fa-check"></i><b>3.2</b> Exercises</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="adding-points.html"><a href="adding-points.html#import-soybean-rust-observations"><i class="fa fa-check"></i><b>3.2.1</b> Import Soybean Rust Observations</a></li>
+<li class="chapter" data-level="3.2.2" data-path="adding-points.html"><a href="adding-points.html#add-soybean-rust-observations-to-br-ggplot2-object"><i class="fa fa-check"></i><b>3.2.2</b> Add Soybean Rust Observations to <code>br</code> ggplot2 Object</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="adding-points.html"><a href="adding-points.html#your-turn-1"><i class="fa fa-check"></i><b>3.3</b> Your Turn</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html"><i class="fa fa-check"></i><b>4</b> Working with Raster Data</a><ul>
+<li class="chapter" data-level="4.1" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#exercises-3"><i class="fa fa-check"></i><b>4.2</b> Exercises</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#download-climate-data-from-worldclim"><i class="fa fa-check"></i><b>4.2.1</b> Download climate data from Worldclim</a></li>
+<li class="chapter" data-level="4.2.2" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#convert-temperature-data"><i class="fa fa-check"></i><b>4.2.2</b> Convert temperature data</a></li>
+<li class="chapter" data-level="4.2.3" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#create-a-data-set-for-january"><i class="fa fa-check"></i><b>4.2.3</b> Create a data set for January</a></li>
+<li class="chapter" data-level="4.2.4" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#create-data-frame-for-ggplot2"><i class="fa fa-check"></i><b>4.2.4</b> Create data frame for ggplot2</a></li>
+<li class="chapter" data-level="4.2.5" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#plot-global-minimum-temperatures"><i class="fa fa-check"></i><b>4.2.5</b> Plot global minimum temperatures</a></li>
+<li class="chapter" data-level="4.2.6" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#brazil-minimum-temperature"><i class="fa fa-check"></i><b>4.2.6</b> Brazil minimum temperature</a></li>
+<li class="chapter" data-level="4.2.7" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#plot-brazil-minimum-temperature"><i class="fa fa-check"></i><b>4.2.7</b> Plot Brazil minimum temperature</a></li>
+<li class="chapter" data-level="4.2.8" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#adding-state-outlines"><i class="fa fa-check"></i><b>4.2.8</b> Adding state outlines</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#your-turn-2"><i class="fa fa-check"></i><b>4.3</b> Your turn</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="wrap-up.html"><a href="wrap-up.html"><i class="fa fa-check"></i><b>5</b> Wrap Up</a><ul>
+<li class="chapter" data-level="5.1" data-path="wrap-up.html"><a href="wrap-up.html#further-reading"><i class="fa fa-check"></i><b>5.1</b> Further Reading</a></li>
+<li class="chapter" data-level="5.2" data-path="wrap-up.html"><a href="wrap-up.html#references"><i class="fa fa-check"></i><b>5.2</b> References</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/adamhsparks/ggplot2_mapping" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An Easy Introduction to Mapping in R with ggplot2</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="creating-country-and-state-level-maps" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Creating Country and State Level Maps</h1>
+<div id="introduction-1" class="section level2">
+<h2><span class="header-section-number">2.1</span> Introduction</h2>
+<p>In this first exercise we will use <a href="https://github.com/ropenscilabs/rnaturalearth"><em>rnaturalearth</em></a>, <a href="https://cran.r-project.org/web/packages/sf/vignettes/sf1.html"><em>simple features</em></a> and
+<em>ggplot2</em> to create a map of Brazil and states within Brazil to use as the base of the maps we will create in these exercises.</p>
+</div>
+<div id="exercises-1" class="section level2">
+<h2><span class="header-section-number">2.2</span> Exercises</h2>
+<div id="create-country-level-map-of-brazil" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Create Country Level Map of Brazil</h3>
+<p>This is our base layer, Brazil, of the map from (Naturalearth.com)[<a href="https://naturalearth.com/" class="uri">https://naturalearth.com/</a>] using the base <code>plot()</code> to display these data.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="creating-country-and-state-level-maps.html#cb5-1"></a><span class="kw">library</span>(rnaturalearth)</span>
+<span id="cb5-2"><a href="creating-country-and-state-level-maps.html#cb5-2"></a></span>
+<span id="cb5-3"><a href="creating-country-and-state-level-maps.html#cb5-3"></a>br_sf &lt;-<span class="st"> </span><span class="kw">ne_states</span>(<span class="dt">geounit =</span> <span class="st">&quot;brazil&quot;</span>,</span>
+<span id="cb5-4"><a href="creating-country-and-state-level-maps.html#cb5-4"></a>                   <span class="dt">returnclass =</span> <span class="st">&quot;sf&quot;</span>)</span>
+<span id="cb5-5"><a href="creating-country-and-state-level-maps.html#cb5-5"></a></span>
+<span id="cb5-6"><a href="creating-country-and-state-level-maps.html#cb5-6"></a><span class="kw">plot</span>(br_sf)</span></code></pre></div>
+<pre><code>## Warning: plotting the first 9 out of 83 attributes; use max.plot = 83 to
+## plot all</code></pre>
+<p><img src="mapping_with_ggplot2_files/figure-html/brazil-base-1.png" width="672" /></p>
+<div id="plot-using-ggplot2" class="section level4">
+<h4><span class="header-section-number">2.2.1.1</span> Plot using <code>ggplot2</code></h4>
+<p>Using <em>ggplot2</em>, we have more control over how the data are displayed.</p>
+<p>First plot the whole country using <code>ggplot()</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="creating-country-and-state-level-maps.html#cb7-1"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb7-2"><a href="creating-country-and-state-level-maps.html#cb7-2"></a></span>
+<span id="cb7-3"><a href="creating-country-and-state-level-maps.html#cb7-3"></a>br &lt;-<span class="st"> </span><span class="kw">ggplot</span>(br_sf) <span class="op">+</span></span>
+<span id="cb7-4"><a href="creating-country-and-state-level-maps.html#cb7-4"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>)</span>
+<span id="cb7-5"><a href="creating-country-and-state-level-maps.html#cb7-5"></a></span>
+<span id="cb7-6"><a href="creating-country-and-state-level-maps.html#cb7-6"></a>br</span></code></pre></div>
+<p><img src="mapping_with_ggplot2_files/figure-html/plot_level1-1.png" width="672" /></p>
+</div>
+<div id="add-labels-to-the-states" class="section level4">
+<h4><span class="header-section-number">2.2.1.2</span> Add Labels to the States</h4>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="creating-country-and-state-level-maps.html#cb8-1"></a>br &lt;-</span>
+<span id="cb8-2"><a href="creating-country-and-state-level-maps.html#cb8-2"></a><span class="st">  </span>br <span class="op">+</span></span>
+<span id="cb8-3"><a href="creating-country-and-state-level-maps.html#cb8-3"></a><span class="st">  </span><span class="kw">geom_text</span>(</span>
+<span id="cb8-4"><a href="creating-country-and-state-level-maps.html#cb8-4"></a>    <span class="dt">data =</span> br_sf,</span>
+<span id="cb8-5"><a href="creating-country-and-state-level-maps.html#cb8-5"></a>    <span class="kw">aes</span>(<span class="dt">x =</span> longitude,</span>
+<span id="cb8-6"><a href="creating-country-and-state-level-maps.html#cb8-6"></a>        <span class="dt">y =</span> latitude,</span>
+<span id="cb8-7"><a href="creating-country-and-state-level-maps.html#cb8-7"></a>        <span class="dt">label =</span> abbrev),</span>
+<span id="cb8-8"><a href="creating-country-and-state-level-maps.html#cb8-8"></a>    <span class="dt">size =</span> <span class="fl">2.5</span>,</span>
+<span id="cb8-9"><a href="creating-country-and-state-level-maps.html#cb8-9"></a>    <span class="dt">hjust =</span> <span class="dv">1</span></span>
+<span id="cb8-10"><a href="creating-country-and-state-level-maps.html#cb8-10"></a>  )</span>
+<span id="cb8-11"><a href="creating-country-and-state-level-maps.html#cb8-11"></a></span>
+<span id="cb8-12"><a href="creating-country-and-state-level-maps.html#cb8-12"></a>br</span></code></pre></div>
+<p><img src="mapping_with_ggplot2_files/figure-html/plot_level2-1.png" width="672" /></p>
+</div>
+<div id="final-touches" class="section level4">
+<h4><span class="header-section-number">2.2.1.3</span> Final Touches</h4>
+<p>Properly label the x and y-axis and set the theme. The <em>ggplot2</em> theme, <code>theme_bw()</code> is nice to use with maps, so we will apply that here as well.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="creating-country-and-state-level-maps.html#cb9-1"></a>br &lt;-<span class="st"> </span></span>
+<span id="cb9-2"><a href="creating-country-and-state-level-maps.html#cb9-2"></a><span class="st">  </span>br <span class="op">+</span></span>
+<span id="cb9-3"><a href="creating-country-and-state-level-maps.html#cb9-3"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb9-4"><a href="creating-country-and-state-level-maps.html#cb9-4"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb9-5"><a href="creating-country-and-state-level-maps.html#cb9-5"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span>
+<span id="cb9-6"><a href="creating-country-and-state-level-maps.html#cb9-6"></a></span>
+<span id="cb9-7"><a href="creating-country-and-state-level-maps.html#cb9-7"></a>br</span></code></pre></div>
+<p><img src="mapping_with_ggplot2_files/figure-html/plot_level3-1.png" width="672" /></p>
+</div>
+</div>
+<div id="create-maps-of-individual-states" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Create Maps of Individual States</h3>
+<p>To create a map of only Minas Gerais, subset the <em>sf</em> object, <code>br</code> such that it contains only the data for Minas Gerais.</p>
+<div id="inspect-column-names-in-br_sf-object" class="section level4">
+<h4><span class="header-section-number">2.2.2.1</span> Inspect Column Names in <code>br_sf</code> Object</h4>
+<p>To find out what the column names are, we can use, <code>colnames()</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="creating-country-and-state-level-maps.html#cb10-1"></a><span class="kw">names</span>(br_sf)</span></code></pre></div>
+<pre><code>##  [1] &quot;featurecla&quot; &quot;scalerank&quot;  &quot;adm1_code&quot;  &quot;diss_me&quot;    &quot;iso_3166_2&quot;
+##  [6] &quot;wikipedia&quot;  &quot;iso_a2&quot;     &quot;adm0_sr&quot;    &quot;name&quot;       &quot;name_alt&quot;  
+## [11] &quot;name_local&quot; &quot;type&quot;       &quot;type_en&quot;    &quot;code_local&quot; &quot;code_hasc&quot; 
+## [16] &quot;note&quot;       &quot;hasc_maybe&quot; &quot;region&quot;     &quot;region_cod&quot; &quot;provnum_ne&quot;
+## [21] &quot;gadm_level&quot; &quot;check_me&quot;   &quot;datarank&quot;   &quot;abbrev&quot;     &quot;postal&quot;    
+## [26] &quot;area_sqkm&quot;  &quot;sameascity&quot; &quot;labelrank&quot;  &quot;name_len&quot;   &quot;mapcolor9&quot; 
+## [31] &quot;mapcolor13&quot; &quot;fips&quot;       &quot;fips_alt&quot;   &quot;woe_id&quot;     &quot;woe_label&quot; 
+## [36] &quot;woe_name&quot;   &quot;latitude&quot;   &quot;longitude&quot;  &quot;sov_a3&quot;     &quot;adm0_a3&quot;   
+## [41] &quot;adm0_label&quot; &quot;admin&quot;      &quot;geonunit&quot;   &quot;gu_a3&quot;      &quot;gn_id&quot;     
+## [46] &quot;gn_name&quot;    &quot;gns_id&quot;     &quot;gns_name&quot;   &quot;gn_level&quot;   &quot;gn_region&quot; 
+## [51] &quot;gn_a1_code&quot; &quot;region_sub&quot; &quot;sub_code&quot;   &quot;gns_level&quot;  &quot;gns_lang&quot;  
+## [56] &quot;gns_adm1&quot;   &quot;gns_region&quot; &quot;min_label&quot;  &quot;max_label&quot;  &quot;min_zoom&quot;  
+## [61] &quot;wikidataid&quot; &quot;name_ar&quot;    &quot;name_bn&quot;    &quot;name_de&quot;    &quot;name_en&quot;   
+## [66] &quot;name_es&quot;    &quot;name_fr&quot;    &quot;name_el&quot;    &quot;name_hi&quot;    &quot;name_hu&quot;   
+## [71] &quot;name_id&quot;    &quot;name_it&quot;    &quot;name_ja&quot;    &quot;name_ko&quot;    &quot;name_nl&quot;   
+## [76] &quot;name_pl&quot;    &quot;name_pt&quot;    &quot;name_ru&quot;    &quot;name_sv&quot;    &quot;name_tr&quot;   
+## [81] &quot;name_vi&quot;    &quot;name_zh&quot;    &quot;ne_id&quot;      &quot;geometry&quot;</code></pre>
+<p>We see that a column named “name_pt” exists, with the Portuguese name spelling for each state in this data set.</p>
+<p>We can use this to <code>filter()</code> the data so that it only represents Minas Gerais and we can use that to make a map.</p>
+<p>For more on subsetting <em>sf</em> objects, see: <a href="https://cran.rstudio.com/web/packages/sf/vignettes/sf4.html" class="uri">https://cran.rstudio.com/web/packages/sf/vignettes/sf4.html</a></p>
+</div>
+<div id="filter-minas-gerais" class="section level4">
+<h4><span class="header-section-number">2.2.2.2</span> Filter Minas Gerais</h4>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="creating-country-and-state-level-maps.html#cb12-1"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb12-2"><a href="creating-country-and-state-level-maps.html#cb12-2"></a></span>
+<span id="cb12-3"><a href="creating-country-and-state-level-maps.html#cb12-3"></a>mg &lt;-<span class="st"> </span><span class="kw">filter</span>(br_sf, name_pt <span class="op">==</span><span class="st"> &quot;Minas Gerais&quot;</span>)</span>
+<span id="cb12-4"><a href="creating-country-and-state-level-maps.html#cb12-4"></a></span>
+<span id="cb12-5"><a href="creating-country-and-state-level-maps.html#cb12-5"></a>mg</span></code></pre></div>
+<pre><code>## Simple feature collection with 1 feature and 83 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: -51.0276 ymin: -22.89292 xmax: -39.86074 ymax: -14.23892
+## epsg (SRID):    4326
+## proj4string:    +proj=longlat +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +no_defs
+##           featurecla scalerank adm1_code diss_me iso_3166_2 wikipedia
+## 1 Admin-1 scale rank         2   BRA-601     601      BR-MG      &lt;NA&gt;
+##   iso_a2 adm0_sr         name           name_alt name_local   type type_en
+## 1     BR       1 Minas Gerais Minas|Minas Geraes       &lt;NA&gt; Estado   State
+##   code_local code_hasc note hasc_maybe region region_cod provnum_ne
+## 1       &lt;NA&gt;     BR.MG &lt;NA&gt;       &lt;NA&gt;   &lt;NA&gt;       &lt;NA&gt;         22
+##   gadm_level check_me datarank abbrev postal area_sqkm sameascity
+## 1          1       20        1 M.G.S.     MG         0         NA
+##   labelrank name_len mapcolor9 mapcolor13 fips fips_alt  woe_id
+## 1         2       12         5          7 BR15     &lt;NA&gt; 2344856
+##                  woe_label     woe_name latitude longitude sov_a3 adm0_a3
+## 1 Minas Gerais, BR, Brazil Minas Gerais -18.5895  -44.4808    BRA     BRA
+##   adm0_label  admin geonunit gu_a3   gn_id                gn_name  gns_id
+## 1          2 Brazil   Brazil   BRA 3457153 Estado de Minas Gerais -655151
+##                  gns_name gn_level gn_region gn_a1_code region_sub
+## 1 Minas Gerais, Estado de        1      &lt;NA&gt;      BR.15       &lt;NA&gt;
+##   sub_code gns_level gns_lang gns_adm1 gns_region min_label max_label
+## 1     &lt;NA&gt;         1      por     BR15       &lt;NA&gt;       3.7       8.5
+##   min_zoom wikidataid name_ar name_bn      name_de      name_en
+## 1        3     Q39109    &lt;NA&gt;    &lt;NA&gt; Minas Gerais Minas Gerais
+##        name_es      name_fr name_el name_hi      name_hu      name_id
+## 1 Minas Gerais Minas Gerais    &lt;NA&gt;    &lt;NA&gt; Minas Gerais Minas Gerais
+##        name_it name_ja name_ko      name_nl      name_pl      name_pt
+## 1 Minas Gerais    &lt;NA&gt;    &lt;NA&gt; Minas Gerais Minas Gerais Minas Gerais
+##   name_ru      name_sv      name_tr      name_vi name_zh      ne_id
+## 1    &lt;NA&gt; Minas Gerais Minas Gerais Minas Gerais    &lt;NA&gt; 1159307907
+##                         geometry
+## 1 MULTIPOLYGON (((-47.30248 -...</code></pre>
+</div>
+<div id="plot-minas-gerais" class="section level4">
+<h4><span class="header-section-number">2.2.2.3</span> Plot Minas Gerais</h4>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="creating-country-and-state-level-maps.html#cb14-1"></a><span class="kw">ggplot</span>(mg) <span class="op">+</span></span>
+<span id="cb14-2"><a href="creating-country-and-state-level-maps.html#cb14-2"></a><span class="st">  </span><span class="kw">geom_sf</span>() <span class="op">+</span></span>
+<span id="cb14-3"><a href="creating-country-and-state-level-maps.html#cb14-3"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb14-4"><a href="creating-country-and-state-level-maps.html#cb14-4"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb14-5"><a href="creating-country-and-state-level-maps.html#cb14-5"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<p><img src="mapping_with_ggplot2_files/figure-html/ggplot-mg-1.png" width="672" /></p>
+</div>
+</div>
+<div id="highlighting-states-within-the-country" class="section level3">
+<h3><span class="header-section-number">2.2.3</span> Highlighting States Within the Country</h3>
+<p>Using the <code>br_sf</code> and <code>mg</code> objects that we have created, it is possible to create a map that highlights one state and labels it using the abbreviation, in this case Minas Gerais.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="creating-country-and-state-level-maps.html#cb15-1"></a><span class="kw">ggplot</span>(br_sf) <span class="op">+</span></span>
+<span id="cb15-2"><a href="creating-country-and-state-level-maps.html#cb15-2"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
+<span id="cb15-3"><a href="creating-country-and-state-level-maps.html#cb15-3"></a><span class="st">  </span><span class="kw">geom_sf</span>(</span>
+<span id="cb15-4"><a href="creating-country-and-state-level-maps.html#cb15-4"></a>    <span class="dt">data =</span> mg,</span>
+<span id="cb15-5"><a href="creating-country-and-state-level-maps.html#cb15-5"></a>    <span class="dt">fill =</span> <span class="st">&quot;red&quot;</span>) <span class="op">+</span></span>
+<span id="cb15-6"><a href="creating-country-and-state-level-maps.html#cb15-6"></a><span class="st">  </span><span class="kw">geom_text</span>(</span>
+<span id="cb15-7"><a href="creating-country-and-state-level-maps.html#cb15-7"></a>    <span class="dt">data =</span> mg,</span>
+<span id="cb15-8"><a href="creating-country-and-state-level-maps.html#cb15-8"></a>    <span class="kw">aes</span>(<span class="dt">x =</span> longitude,</span>
+<span id="cb15-9"><a href="creating-country-and-state-level-maps.html#cb15-9"></a>        <span class="dt">y =</span> latitude,</span>
+<span id="cb15-10"><a href="creating-country-and-state-level-maps.html#cb15-10"></a>        <span class="dt">label =</span> abbrev),</span>
+<span id="cb15-11"><a href="creating-country-and-state-level-maps.html#cb15-11"></a>    <span class="dt">size =</span> <span class="fl">2.5</span>,</span>
+<span id="cb15-12"><a href="creating-country-and-state-level-maps.html#cb15-12"></a>    <span class="dt">hjust =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb15-13"><a href="creating-country-and-state-level-maps.html#cb15-13"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb15-14"><a href="creating-country-and-state-level-maps.html#cb15-14"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb15-15"><a href="creating-country-and-state-level-maps.html#cb15-15"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<p><img src="mapping_with_ggplot2_files/figure-html/hightlight-mg-1.png" width="672" /></p>
+</div>
+</div>
+<div id="your-turn" class="section level2">
+<h2><span class="header-section-number">2.3</span> Your Turn</h2>
+<blockquote>
+<p><strong>Using the examples above, download and create a map of Australia. Then highlight Queensland.</strong></p>
+</blockquote>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="adding-points.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["mapping_with_ggplot2.pdf", "mapping_with_ggplot2.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
