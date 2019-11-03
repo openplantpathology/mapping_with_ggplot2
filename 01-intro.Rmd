@@ -12,16 +12,23 @@ Understanding how these data differ is important to being able to use them in ma
 
 Spatial data has its own unique properties. Packages that are commonly used with spatial data in R include.
 
-* [_raster_](https://cran.r-project.org/web/packages/raster/index.html) [@raster], 
-* [_sf_](https://cran.r-project.org/web/packages/raster/index.html) [@sf], 
-* [_rnaturalearth_](https://cran.r-project.org/web/packages/rnaturalearth/README.html) [@rnaturalearth], and
-* [_rnaturalearthdata_](https://cran.r-project.org/web/packages/rnaturalearthdata/index.html)
+* [_raster_](https://CRAN.R-project.org/package=raster) [@raster], 
+* [_sf_](https://CRAN.R-project.org/package=raster) [@sf], 
+* [_rnaturalearth_](https://CRAN.R-project.org/package=rnaturalearth) [@rnaturalearth],
+* [_rnaturalearthdata_](https://CRAN.R-project.org/package=rnaturalearthdata),
+* [_ggspatial_](https://CRAN.R-project.org/package=ggspatial) [@ggspatial],
+* _grid_ (this is a part of your base R installation) and
+* [_gridExtra_](https://CRAN.R-project.org/package=gridExtra).
 
 The _raster_ package is used to handle raster data files but also offers capabilities to download and import other data including country-level outlines ([GADM](https://gadm.org/)), elevation (SRTM data) and bioclimatic variables from [Worldclim](https://www.worldclim.org/).
 
 _sf_ is used to handle vector-format files and _ggplot2_ now offers `geom_sf()` for easy plotting of _sf_ objects.
 
 _rnaturalearth_ and _rnaturalearthdata_ facilitate mapping using data from [http://www.naturalearthdata.com/](http://www.naturalearthdata.com/).
+
+_ggspatial_ is used to add map elements such as scale bars and north arrows to _ggplot2_ objects.
+
+_grid_ and _gridExtra_ are used to add what are called "neatlines", an outline around the map to contain all the elements of the map.
 
 You may also want to visit [https://rspatial.org](https://rspatial.org/) for more packages, tutorials and information.
 
@@ -32,7 +39,13 @@ You may also want to visit [https://rspatial.org](https://rspatial.org/) for mor
 Install the packages necessary for working with spatial data in R. _This will take a few moments to complete._
 
 ```{r install-spatial, eval=FALSE}
-install.packages(c("raster", "sf", "rnaturalearth", "rnaturalearthdata"))
+install.packages(c(
+  "raster",
+  "sf",
+  "rnaturalearth",
+  "rnaturalearthdata",
+  "ggspatial"
+))
 ```
 
 Once the main packages are installed, the second step is to install the _rnaturalearthhires_ package as well.

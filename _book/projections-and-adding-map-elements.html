@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Projections and Adding Map Elements | A Gentle Introduction to Mapping in R with ggplot2</title>
+  <meta name="description" content="This book contains examples of how to make simple maps in ggplot2." />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Projections and Adding Map Elements | A Gentle Introduction to Mapping in R with ggplot2" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This book contains examples of how to make simple maps in ggplot2." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Projections and Adding Map Elements | A Gentle Introduction to Mapping in R with ggplot2" />
+  
+  <meta name="twitter:description" content="This book contains examples of how to make simple maps in ggplot2." />
+  
+
+<meta name="author" content="Adam H. Sparks" />
+
+
+<meta name="date" content="2019-11-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="working-with-raster-data.html"/>
+<link rel="next" href="wrap-up.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">An Easy Introduction to Mapping in R with ggplot2</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#what-you-will-learn"><i class="fa fa-check"></i><b>0.1</b> What You Will Learn</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#what-you-will-use"><i class="fa fa-check"></i><b>0.2</b> What You Will Use</a></li>
+<li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#colophon"><i class="fa fa-check"></i><b>0.3</b> Colophon</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Working with Spatial Data in R</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#forms-of-spatial-data"><i class="fa fa-check"></i><b>1.1</b> Forms of Spatial Data</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#spatial-packages"><i class="fa fa-check"></i><b>1.2</b> Spatial Packages</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#exercises"><i class="fa fa-check"></i><b>1.3</b> Exercises</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="intro.html"><a href="intro.html#install-spatial-packages"><i class="fa fa-check"></i><b>1.3.1</b> Install Spatial Packages</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html"><i class="fa fa-check"></i><b>2</b> Creating Country and State Level Maps</a><ul>
+<li class="chapter" data-level="2.1" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#exercises-1"><i class="fa fa-check"></i><b>2.2</b> Exercises</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#create-country-level-map-of-brazil"><i class="fa fa-check"></i><b>2.2.1</b> Create Country Level Map of Brazil</a></li>
+<li class="chapter" data-level="2.2.2" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#create-maps-of-individual-states"><i class="fa fa-check"></i><b>2.2.2</b> Create Maps of Individual States</a></li>
+<li class="chapter" data-level="2.2.3" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#highlighting-states-within-the-country"><i class="fa fa-check"></i><b>2.2.3</b> Highlighting States Within the Country</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="creating-country-and-state-level-maps.html"><a href="creating-country-and-state-level-maps.html#your-turn"><i class="fa fa-check"></i><b>2.3</b> Your Turn</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="adding-points.html"><a href="adding-points.html"><i class="fa fa-check"></i><b>3</b> Adding Points</a><ul>
+<li class="chapter" data-level="3.1" data-path="adding-points.html"><a href="adding-points.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="adding-points.html"><a href="adding-points.html#exercises-2"><i class="fa fa-check"></i><b>3.2</b> Exercises</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="adding-points.html"><a href="adding-points.html#import-soybean-rust-observations"><i class="fa fa-check"></i><b>3.2.1</b> Import Soybean Rust Observations</a></li>
+<li class="chapter" data-level="3.2.2" data-path="adding-points.html"><a href="adding-points.html#add-soybean-rust-observations-to-br-ggplot2-object"><i class="fa fa-check"></i><b>3.2.2</b> Add Soybean Rust Observations to <code>br</code> ggplot2 Object</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="adding-points.html"><a href="adding-points.html#your-turn-1"><i class="fa fa-check"></i><b>3.3</b> Your Turn</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html"><i class="fa fa-check"></i><b>4</b> Working with Raster Data</a><ul>
+<li class="chapter" data-level="4.1" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#exercises-3"><i class="fa fa-check"></i><b>4.2</b> Exercises</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#download-climate-data-from-worldclim"><i class="fa fa-check"></i><b>4.2.1</b> Download Climate Data from Worldclim</a></li>
+<li class="chapter" data-level="4.2.2" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#convert-temperature-data"><i class="fa fa-check"></i><b>4.2.2</b> Convert Temperature Data</a></li>
+<li class="chapter" data-level="4.2.3" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#create-a-data-set-for-january"><i class="fa fa-check"></i><b>4.2.3</b> Create a Data Set for January</a></li>
+<li class="chapter" data-level="4.2.4" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#create-data-frame-for-ggplot2"><i class="fa fa-check"></i><b>4.2.4</b> Create Data Frame for ggplot2</a></li>
+<li class="chapter" data-level="4.2.5" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#plot-global-minimum-temperatures"><i class="fa fa-check"></i><b>4.2.5</b> Plot Global Minimum Temperatures</a></li>
+<li class="chapter" data-level="4.2.6" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#brazil-minimum-temperature"><i class="fa fa-check"></i><b>4.2.6</b> Brazil Minimum Temperature</a></li>
+<li class="chapter" data-level="4.2.7" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#plot-brazil-minimum-temperature"><i class="fa fa-check"></i><b>4.2.7</b> Plot Brazil Minimum Temperature</a></li>
+<li class="chapter" data-level="4.2.8" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#adding-state-outlines"><i class="fa fa-check"></i><b>4.2.8</b> Adding State Outlines</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#your-turn-2"><i class="fa fa-check"></i><b>4.3</b> Your Turn</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="projections-and-adding-map-elements.html"><a href="projections-and-adding-map-elements.html"><i class="fa fa-check"></i><b>5</b> Projections and Adding Map Elements</a><ul>
+<li class="chapter" data-level="5.1" data-path="projections-and-adding-map-elements.html"><a href="projections-and-adding-map-elements.html#introduction-4"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="projections-and-adding-map-elements.html"><a href="projections-and-adding-map-elements.html#exercises-4"><i class="fa fa-check"></i><b>5.2</b> Exercises</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="projections-and-adding-map-elements.html"><a href="projections-and-adding-map-elements.html#re-project-data"><i class="fa fa-check"></i><b>5.2.1</b> Re-project Data</a></li>
+<li class="chapter" data-level="5.2.2" data-path="projections-and-adding-map-elements.html"><a href="projections-and-adding-map-elements.html#adding-north-arrows-and-scale-bars"><i class="fa fa-check"></i><b>5.2.2</b> Adding North Arrows and Scale Bars</a></li>
+<li class="chapter" data-level="5.2.3" data-path="projections-and-adding-map-elements.html"><a href="projections-and-adding-map-elements.html#adding-a-descriptive-title-and-data-source"><i class="fa fa-check"></i><b>5.2.3</b> Adding a Descriptive Title and Data Source</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="projections-and-adding-map-elements.html"><a href="projections-and-adding-map-elements.html#your-turn-3"><i class="fa fa-check"></i><b>5.3</b> Your Turn</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="wrap-up.html"><a href="wrap-up.html"><i class="fa fa-check"></i><b>6</b> Wrap Up</a><ul>
+<li class="chapter" data-level="6.1" data-path="wrap-up.html"><a href="wrap-up.html#learning-more"><i class="fa fa-check"></i><b>6.1</b> Learning more</a></li>
+<li class="chapter" data-level="6.2" data-path="wrap-up.html"><a href="wrap-up.html#references"><i class="fa fa-check"></i><b>6.2</b> References</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/adamhsparks/ggplot2_mapping" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Gentle Introduction to Mapping in R with ggplot2</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="projections-and-adding-map-elements" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Projections and Adding Map Elements</h1>
+<div id="introduction-4" class="section level2">
+<h2><span class="header-section-number">5.1</span> Introduction</h2>
+<p>In this section we will polish the map for publication.</p>
+<p>Maps traditionally have several specific elements that help them convey the information to the user.
+These include legends, which we’ve already added to our maps, north arrows to orient the user and scale bars and scale to show the scale of the map.</p>
+<p>Projections are used to represent the spherical surface of the Earth in a flat plane.
+Think of wrapping a piece of paper around a ball.
+It does not wrap evenly, a map is the reverse process, trying to flatten a globe or sphere.
+Projections help us deal with these distortions.
+Published maps should always be projected for the area of interest.
+As the area gets smaller, the projection becomes less important.
+The data that we downloaded from Naturalearthdata and Worldclim both are in an <a href="https://en.wikipedia.org/wiki/Equirectangular_projection">Equirectangular projection</a>.</p>
+<p>In the exercises, first, we will re-project the data to SIRGAS 2000, which is what the Brazilian government normally uses for their maps.
+Then we will add elements to complete our map including the north arrow, scale bar and text, title, data attribution and a neatline.</p>
+</div>
+<div id="exercises-4" class="section level2">
+<h2><span class="header-section-number">5.2</span> Exercises</h2>
+<div id="re-project-data" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Re-project Data</h3>
+<p>Check the current projections of the data.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="projections-and-adding-map-elements.html#cb40-1"></a><span class="kw">library</span>(sf)</span>
+<span id="cb40-2"><a href="projections-and-adding-map-elements.html#cb40-2"></a><span class="kw">st_crs</span>(br_sf)</span></code></pre></div>
+<pre><code>## Coordinate Reference System:
+##   EPSG: 4326 
+##   proj4string: &quot;+proj=longlat +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +no_defs&quot;</code></pre>
+<p>To reproject the data we will provide the definition for SIRGAS 2000.
+The information for the <code>proj4text</code> comes from <a href="https://epsg.io/4674" class="uri">https://epsg.io/4674</a> which has information for several different map projections.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="projections-and-adding-map-elements.html#cb42-1"></a>br_sf &lt;-<span class="st"> </span><span class="kw">st_transform</span>(br_sf, <span class="dv">4674</span>)</span>
+<span id="cb42-2"><a href="projections-and-adding-map-elements.html#cb42-2"></a><span class="kw">st_crs</span>(br_sf)</span></code></pre></div>
+<pre><code>## Coordinate Reference System:
+##   EPSG: 4674 
+##   proj4string: &quot;+proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs&quot;</code></pre>
+</div>
+<div id="adding-north-arrows-and-scale-bars" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Adding North Arrows and Scale Bars</h3>
+<p>Using <em>ggspatial</em> we will add a scale bar and north arrow to the map of Minas Gerais to the bottom right corner where there is a bit of space for them.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="projections-and-adding-map-elements.html#cb44-1"></a><span class="kw">library</span>(<span class="st">&quot;ggspatial&quot;</span>)</span>
+<span id="cb44-2"><a href="projections-and-adding-map-elements.html#cb44-2"></a></span>
+<span id="cb44-3"><a href="projections-and-adding-map-elements.html#cb44-3"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb44-4"><a href="projections-and-adding-map-elements.html#cb44-4"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> br_sf) <span class="op">+</span></span>
+<span id="cb44-5"><a href="projections-and-adding-map-elements.html#cb44-5"></a><span class="st">  </span><span class="kw">geom_raster</span>(<span class="dt">data =</span> brazil, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">fill =</span> tmin1)) <span class="op">+</span></span>
+<span id="cb44-6"><a href="projections-and-adding-map-elements.html#cb44-6"></a><span class="st">  </span><span class="kw">scale_fill_viridis_c</span>(<span class="st">&quot;Min</span><span class="ch">\n</span><span class="st">T (°C)&quot;</span>, <span class="dt">na.value =</span> <span class="ot">NA</span>) <span class="op">+</span></span>
+<span id="cb44-7"><a href="projections-and-adding-map-elements.html#cb44-7"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb44-8"><a href="projections-and-adding-map-elements.html#cb44-8"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb44-9"><a href="projections-and-adding-map-elements.html#cb44-9"></a><span class="st">  </span><span class="kw">annotation_north_arrow</span>(</span>
+<span id="cb44-10"><a href="projections-and-adding-map-elements.html#cb44-10"></a>    <span class="dt">location =</span> <span class="st">&quot;br&quot;</span>,</span>
+<span id="cb44-11"><a href="projections-and-adding-map-elements.html#cb44-11"></a>    <span class="dt">which_north =</span> <span class="st">&quot;true&quot;</span>,</span>
+<span id="cb44-12"><a href="projections-and-adding-map-elements.html#cb44-12"></a>    <span class="dt">pad_x =</span> <span class="kw">unit</span>(<span class="fl">0.25</span>, <span class="st">&quot;in&quot;</span>),</span>
+<span id="cb44-13"><a href="projections-and-adding-map-elements.html#cb44-13"></a>    <span class="dt">pad_y =</span> <span class="kw">unit</span>(<span class="fl">0.25</span>, <span class="st">&quot;in&quot;</span>),</span>
+<span id="cb44-14"><a href="projections-and-adding-map-elements.html#cb44-14"></a>    <span class="dt">style =</span> north_arrow_fancy_orienteering</span>
+<span id="cb44-15"><a href="projections-and-adding-map-elements.html#cb44-15"></a>  ) <span class="op">+</span></span>
+<span id="cb44-16"><a href="projections-and-adding-map-elements.html#cb44-16"></a><span class="st">  </span><span class="kw">coord_sf</span>() <span class="op">+</span></span>
+<span id="cb44-17"><a href="projections-and-adding-map-elements.html#cb44-17"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<pre><code>## Warning: Removed 37943 rows containing missing values (geom_raster).</code></pre>
+<p><img src="mapping_with_ggplot2_files/figure-html/n-arrow-1.png" width="672" /></p>
+<p>Next we will add the scale bar to the bottom right where there is a bit more space and it won’t interfere with the map.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="projections-and-adding-map-elements.html#cb46-1"></a>br_tmin &lt;-<span class="st"> </span><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb46-2"><a href="projections-and-adding-map-elements.html#cb46-2"></a><span class="st">  </span><span class="kw">geom_sf</span>(<span class="dt">data =</span> br_sf) <span class="op">+</span></span>
+<span id="cb46-3"><a href="projections-and-adding-map-elements.html#cb46-3"></a><span class="st">  </span><span class="kw">geom_raster</span>(<span class="dt">data =</span> brazil, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">fill =</span> tmin1)) <span class="op">+</span></span>
+<span id="cb46-4"><a href="projections-and-adding-map-elements.html#cb46-4"></a><span class="st">  </span><span class="kw">scale_fill_viridis_c</span>(<span class="st">&quot;Min</span><span class="ch">\n</span><span class="st">T (°C)&quot;</span>, <span class="dt">na.value =</span> <span class="ot">NA</span>) <span class="op">+</span></span>
+<span id="cb46-5"><a href="projections-and-adding-map-elements.html#cb46-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Longitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb46-6"><a href="projections-and-adding-map-elements.html#cb46-6"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Latitude&quot;</span>) <span class="op">+</span></span>
+<span id="cb46-7"><a href="projections-and-adding-map-elements.html#cb46-7"></a><span class="st">  </span><span class="kw">annotation_north_arrow</span>(</span>
+<span id="cb46-8"><a href="projections-and-adding-map-elements.html#cb46-8"></a>    <span class="dt">location =</span> <span class="st">&quot;br&quot;</span>,</span>
+<span id="cb46-9"><a href="projections-and-adding-map-elements.html#cb46-9"></a>    <span class="dt">which_north =</span> <span class="st">&quot;true&quot;</span>,</span>
+<span id="cb46-10"><a href="projections-and-adding-map-elements.html#cb46-10"></a>    <span class="dt">pad_x =</span> <span class="kw">unit</span>(<span class="fl">0.25</span>, <span class="st">&quot;in&quot;</span>),</span>
+<span id="cb46-11"><a href="projections-and-adding-map-elements.html#cb46-11"></a>    <span class="dt">pad_y =</span> <span class="kw">unit</span>(<span class="fl">0.25</span>, <span class="st">&quot;in&quot;</span>),</span>
+<span id="cb46-12"><a href="projections-and-adding-map-elements.html#cb46-12"></a>    <span class="dt">style =</span> north_arrow_fancy_orienteering</span>
+<span id="cb46-13"><a href="projections-and-adding-map-elements.html#cb46-13"></a>  ) <span class="op">+</span></span>
+<span id="cb46-14"><a href="projections-and-adding-map-elements.html#cb46-14"></a><span class="st">  </span><span class="kw">annotation_scale</span>(<span class="dt">location =</span> <span class="st">&quot;br&quot;</span>, <span class="dt">width_hint =</span> <span class="fl">0.5</span>) <span class="op">+</span></span>
+<span id="cb46-15"><a href="projections-and-adding-map-elements.html#cb46-15"></a><span class="st">  </span><span class="kw">coord_sf</span>() <span class="op">+</span></span>
+<span id="cb46-16"><a href="projections-and-adding-map-elements.html#cb46-16"></a><span class="st">  </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+</div>
+<div id="adding-a-descriptive-title-and-data-source" class="section level3">
+<h3><span class="header-section-number">5.2.3</span> Adding a Descriptive Title and Data Source</h3>
+<p>Adding a title is the same as any other <em>ggplot2</em> object.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="projections-and-adding-map-elements.html#cb47-1"></a>br_tmin <span class="op">+</span></span>
+<span id="cb47-2"><a href="projections-and-adding-map-elements.html#cb47-2"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Map of Minimum Average Temperature&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 37943 rows containing missing values (geom_raster).</code></pre>
+<p><img src="mapping_with_ggplot2_files/figure-html/map-title-1.png" width="672" /></p>
+<p>It is always a good idea to credit the sources of the map data, especially if it is not your own.
+<code>labs()</code> has options for subtitles, which can be useful, but also a <code>caption</code> argument, which is useful for adding data attributions to your map.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="projections-and-adding-map-elements.html#cb49-1"></a>br_tmin &lt;-</span>
+<span id="cb49-2"><a href="projections-and-adding-map-elements.html#cb49-2"></a><span class="st">  </span>br_tmin <span class="op">+</span></span>
+<span id="cb49-3"><a href="projections-and-adding-map-elements.html#cb49-3"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Map of Minimum Average Temperature&quot;</span>,</span>
+<span id="cb49-4"><a href="projections-and-adding-map-elements.html#cb49-4"></a>       <span class="dt">subtitle =</span> <span class="st">&quot;Month of January&quot;</span>,</span>
+<span id="cb49-5"><a href="projections-and-adding-map-elements.html#cb49-5"></a>       <span class="dt">caption =</span> <span class="st">&quot;Data from Worlclim, used with permission&quot;</span>)</span>
+<span id="cb49-6"><a href="projections-and-adding-map-elements.html#cb49-6"></a></span>
+<span id="cb49-7"><a href="projections-and-adding-map-elements.html#cb49-7"></a>br_tmin</span></code></pre></div>
+<p><img src="mapping_with_ggplot2_files/figure-html/data-attribution-1.png" width="672" /></p>
+<p>Neatlines are traditionally part of a map but in many cases nowadays, it is not uncommon to see maps without them.
+If you wish to add a neatline to your map it is possible to do using the <em>gridExtra</em> and <em>grid</em> packages.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="projections-and-adding-map-elements.html#cb50-1"></a><span class="kw">library</span>(grid)</span>
+<span id="cb50-2"><a href="projections-and-adding-map-elements.html#cb50-2"></a><span class="kw">library</span>(gridExtra)</span>
+<span id="cb50-3"><a href="projections-and-adding-map-elements.html#cb50-3"></a></span>
+<span id="cb50-4"><a href="projections-and-adding-map-elements.html#cb50-4"></a><span class="kw">grid.arrange</span>(br_tmin, <span class="dt">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 37943 rows containing missing values (geom_raster).</code></pre>
+<pre><code>## Scale on map varies by more than 10%, scale bar may be inaccurate</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="projections-and-adding-map-elements.html#cb53-1"></a><span class="kw">grid.rect</span>(</span>
+<span id="cb53-2"><a href="projections-and-adding-map-elements.html#cb53-2"></a>  <span class="dt">width =</span> <span class="fl">0.98</span>,</span>
+<span id="cb53-3"><a href="projections-and-adding-map-elements.html#cb53-3"></a>  <span class="dt">height =</span> <span class="fl">0.98</span>,</span>
+<span id="cb53-4"><a href="projections-and-adding-map-elements.html#cb53-4"></a>  <span class="dt">gp =</span> <span class="kw">gpar</span>(<span class="dt">lwd =</span> <span class="fl">0.25</span>,</span>
+<span id="cb53-5"><a href="projections-and-adding-map-elements.html#cb53-5"></a>            <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb53-6"><a href="projections-and-adding-map-elements.html#cb53-6"></a>            <span class="dt">fill =</span> <span class="ot">NA</span>)</span>
+<span id="cb53-7"><a href="projections-and-adding-map-elements.html#cb53-7"></a>)</span></code></pre></div>
+<p><img src="mapping_with_ggplot2_files/figure-html/neatline-1.png" width="672" /></p>
+</div>
+</div>
+<div id="your-turn-3" class="section level2 exercise">
+<h2><span class="header-section-number">5.3</span> Your Turn</h2>
+<ul>
+<li><p>Using the examples above, create a map of a state in Brazil of your choice, add all of the map elements from above to make a complete map of just the state.</p></li>
+<li><p>Using the datavfor the map of tmin for Minas Gerais you created in the last exercise, create a map of tmin for Minas Gerais and add all the appropriate map elements to it.</p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="working-with-raster-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="wrap-up.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["mapping_with_ggplot2.pdf", "mapping_with_ggplot2.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

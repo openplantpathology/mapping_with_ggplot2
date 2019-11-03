@@ -1,0 +1,128 @@
+# Projections and Adding Map Elements
+
+## Introduction
+
+In this section we will polish the map for publication.
+
+Maps traditionally have several specific elements that help them convey the information to the user.
+These include legends, which we've already added to our maps, north arrows to orient the user and scale bars and scale to show the scale of the map.
+
+Projections are used to represent the spherical surface of the Earth in a flat plane. 
+Think of wrapping a piece of paper around a ball.
+It does not wrap evenly, a map is the reverse process, trying to flatten a globe or sphere.
+Projections help us deal with these distortions.
+Published maps should always be projected for the area of interest.
+As the area gets smaller, the projection becomes less important.
+The data that we downloaded from Naturalearthdata and Worldclim both are in an [Equirectangular projection](https://en.wikipedia.org/wiki/Equirectangular_projection).
+
+In the exercises, first, we will re-project the data to SIRGAS 2000, which is what the Brazilian government normally uses for their maps.
+Then we will add elements to complete our map including the north arrow, scale bar and text, title, data attribution and a neatline.
+
+## Exercises
+
+### Re-project Data
+
+Check the current projections of the data.
+
+```{r re-project}
+library(sf)
+st_crs(br_sf)
+```
+
+To reproject the data we will provide the definition for SIRGAS 2000.
+The information for the `proj4text` comes from <https://epsg.io/4674> which has information for several different map projections.
+
+```{r sirgas-2000}
+br_sf <- st_transform(br_sf, 4674)
+st_crs(br_sf)
+```
+
+### Adding North Arrows and Scale Bars
+
+Using _ggspatial_ we will add a scale bar and north arrow to the map of Minas Gerais to the bottom right corner where there is a bit of space for them.
+
+```{r n-arrow, message=FALSE}
+library("ggspatial")
+
+ggplot() +
+  geom_sf(data = br_sf) +
+  geom_raster(data = brazil, aes(x = x, y = y, fill = tmin1)) +
+  scale_fill_viridis_c("Min\nT (°C)", na.value = NA) +
+  xlab("Longitude") +
+  ylab("Latitude") +
+  annotation_north_arrow(
+    location = "br",
+    which_north = "true",
+    pad_x = unit(0.25, "in"),
+    pad_y = unit(0.25, "in"),
+    style = north_arrow_fancy_orienteering
+  ) +
+  coord_sf() +
+  theme_bw()
+```
+
+Next we will add the scale bar to the bottom right where there is a bit more space and it won't interfere with the map.
+
+```{r scale-bar-1, message=FALSE}
+br_tmin <- ggplot() +
+  geom_sf(data = br_sf) +
+  geom_raster(data = brazil, aes(x = x, y = y, fill = tmin1)) +
+  scale_fill_viridis_c("Min\nT (°C)", na.value = NA) +
+  xlab("Longitude") +
+  ylab("Latitude") +
+  annotation_north_arrow(
+    location = "br",
+    which_north = "true",
+    pad_x = unit(0.25, "in"),
+    pad_y = unit(0.25, "in"),
+    style = north_arrow_fancy_orienteering
+  ) +
+  annotation_scale(location = "br", width_hint = 0.5) +
+  coord_sf() +
+  theme_bw()
+```
+
+### Adding a Descriptive Title and Data Source
+
+Adding a title is the same as any other _ggplot2_ object.
+
+```{r map-title, message=FALSE}
+br_tmin +
+  labs(title = "Map of Minimum Average Temperature")
+```
+
+It is always a good idea to credit the sources of the map data, especially if it is not your own.
+`labs()` has options for subtitles, which can be useful, but also a `caption` argument, which is useful for adding data attributions to your map.
+
+```{r data-attribution, warning=FALSE, message=FALSE}
+br_tmin <-
+  br_tmin +
+  labs(title = "Map of Minimum Average Temperature",
+       subtitle = "Month of January",
+       caption = "Data from Worlclim, used with permission")
+
+br_tmin
+```
+
+Neatlines are traditionally part of a map but in many cases nowadays, it is not uncommon to see maps without them.
+If you wish to add a neatline to your map it is possible to do using the _gridExtra_ and _grid_ packages.
+
+```{r neatline}
+library(grid)
+library(gridExtra)
+
+grid.arrange(br_tmin, ncol = 1)
+grid.rect(
+  width = 0.98,
+  height = 0.98,
+  gp = gpar(lwd = 0.25,
+            col = "black",
+            fill = NA)
+)
+```
+
+## Your Turn {.exercise}
+
+* Using the examples above, create a map of a state in Brazil of your choice, add all of the map elements from above to make a complete map of just the state.
+
+* Using the datavfor the map of tmin for Minas Gerais you created in the last exercise, create a map of tmin for Minas Gerais and add all the appropriate map elements to it.

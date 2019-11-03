@@ -1,4 +1,3 @@
-
 # Creating Country and State Level Maps
 
 ## Introduction
@@ -11,6 +10,8 @@ _ggplot2_ to create a map of Brazil and states within Brazil to use as the base 
 ### Create Country Level Map of Brazil
 
 This is our base layer, Brazil, of the map from (Naturalearth.com)[https://naturalearth.com/] using the base `plot()` to display these data.
+
+Using `ne_states()` will return an `sf` object with state level information. There is also a `ne_countries()` to download country level outlines only as well.
 
 ```{r brazil-base}
 library(rnaturalearth)
@@ -37,6 +38,8 @@ br
 ```
 
 #### Add Labels to the States
+
+The naturalearth data have several columns to work with. One of them is the abbreviation for the states. Using `geom_text()`, we can add this information to the map. 
 
 ```{r plot_level2}
 br <-
@@ -98,7 +101,7 @@ mg
 #### Plot Minas Gerais
 
 ```{r ggplot-mg}
-ggplot(mg) +
+ggplot(data = mg) +
   geom_sf() +
   xlab("Longitude") +
   ylab("Latitude") +
@@ -110,7 +113,7 @@ ggplot(mg) +
 Using the `br_sf` and `mg` objects that we have created, it is possible to create a map that highlights one state and labels it using the abbreviation, in this case Minas Gerais.
 
 ```{r hightlight-mg}
-ggplot(br_sf) +
+ggplot(data = br_sf) +
   geom_sf(fill = "white") +
   geom_sf(
     data = mg,
@@ -127,7 +130,6 @@ ggplot(br_sf) +
   theme_bw()
 ```
 
-## Your Turn
+## Your Turn {.exercise}
 
-> **Using the examples above, download and create a map of Australia. Then highlight Queensland.**
-
+Using the examples above, download and create a map of Australia. Then highlight Queensland.

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Working with Spatial Data in R | An Easy Introduction to Mapping in R with ggplot2</title>
+  <title>Chapter 1 Working with Spatial Data in R | A Gentle Introduction to Mapping in R with ggplot2</title>
   <meta name="description" content="This book contains examples of how to make simple maps in ggplot2." />
   <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Working with Spatial Data in R | An Easy Introduction to Mapping in R with ggplot2" />
+  <meta property="og:title" content="Chapter 1 Working with Spatial Data in R | A Gentle Introduction to Mapping in R with ggplot2" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Working with Spatial Data in R | An Easy Introduction to Mapping in R with ggplot2" />
+  <meta name="twitter:title" content="Chapter 1 Working with Spatial Data in R | A Gentle Introduction to Mapping in R with ggplot2" />
   
   <meta name="twitter:description" content="This book contains examples of how to make simple maps in ggplot2." />
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Adam H. Sparks" />
 
 
-<meta name="date" content="2019-11-01" />
+<meta name="date" content="2019-11-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -133,8 +133,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a><ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#what-you-will-learn"><i class="fa fa-check"></i><b>0.1</b> What you will learn</a></li>
-<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#what-you-will-use"><i class="fa fa-check"></i><b>0.2</b> What you will use</a></li>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#what-you-will-learn"><i class="fa fa-check"></i><b>0.1</b> What You Will Learn</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#what-you-will-use"><i class="fa fa-check"></i><b>0.2</b> What You Will Use</a></li>
 <li class="chapter" data-level="0.3" data-path="index.html"><a href="index.html#colophon"><i class="fa fa-check"></i><b>0.3</b> Colophon</a></li>
 </ul></li>
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Working with Spatial Data in R</a><ul>
@@ -164,20 +164,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html"><i class="fa fa-check"></i><b>4</b> Working with Raster Data</a><ul>
 <li class="chapter" data-level="4.1" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
 <li class="chapter" data-level="4.2" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#exercises-3"><i class="fa fa-check"></i><b>4.2</b> Exercises</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#download-climate-data-from-worldclim"><i class="fa fa-check"></i><b>4.2.1</b> Download climate data from Worldclim</a></li>
-<li class="chapter" data-level="4.2.2" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#convert-temperature-data"><i class="fa fa-check"></i><b>4.2.2</b> Convert temperature data</a></li>
-<li class="chapter" data-level="4.2.3" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#create-a-data-set-for-january"><i class="fa fa-check"></i><b>4.2.3</b> Create a data set for January</a></li>
-<li class="chapter" data-level="4.2.4" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#create-data-frame-for-ggplot2"><i class="fa fa-check"></i><b>4.2.4</b> Create data frame for ggplot2</a></li>
-<li class="chapter" data-level="4.2.5" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#plot-global-minimum-temperatures"><i class="fa fa-check"></i><b>4.2.5</b> Plot global minimum temperatures</a></li>
-<li class="chapter" data-level="4.2.6" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#brazil-minimum-temperature"><i class="fa fa-check"></i><b>4.2.6</b> Brazil minimum temperature</a></li>
-<li class="chapter" data-level="4.2.7" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#plot-brazil-minimum-temperature"><i class="fa fa-check"></i><b>4.2.7</b> Plot Brazil minimum temperature</a></li>
-<li class="chapter" data-level="4.2.8" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#adding-state-outlines"><i class="fa fa-check"></i><b>4.2.8</b> Adding state outlines</a></li>
+<li class="chapter" data-level="4.2.1" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#download-climate-data-from-worldclim"><i class="fa fa-check"></i><b>4.2.1</b> Download Climate Data from Worldclim</a></li>
+<li class="chapter" data-level="4.2.2" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#convert-temperature-data"><i class="fa fa-check"></i><b>4.2.2</b> Convert Temperature Data</a></li>
+<li class="chapter" data-level="4.2.3" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#create-a-data-set-for-january"><i class="fa fa-check"></i><b>4.2.3</b> Create a Data Set for January</a></li>
+<li class="chapter" data-level="4.2.4" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#create-data-frame-for-ggplot2"><i class="fa fa-check"></i><b>4.2.4</b> Create Data Frame for ggplot2</a></li>
+<li class="chapter" data-level="4.2.5" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#plot-global-minimum-temperatures"><i class="fa fa-check"></i><b>4.2.5</b> Plot Global Minimum Temperatures</a></li>
+<li class="chapter" data-level="4.2.6" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#brazil-minimum-temperature"><i class="fa fa-check"></i><b>4.2.6</b> Brazil Minimum Temperature</a></li>
+<li class="chapter" data-level="4.2.7" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#plot-brazil-minimum-temperature"><i class="fa fa-check"></i><b>4.2.7</b> Plot Brazil Minimum Temperature</a></li>
+<li class="chapter" data-level="4.2.8" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#adding-state-outlines"><i class="fa fa-check"></i><b>4.2.8</b> Adding State Outlines</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#your-turn-2"><i class="fa fa-check"></i><b>4.3</b> Your turn</a></li>
+<li class="chapter" data-level="4.3" data-path="working-with-raster-data.html"><a href="working-with-raster-data.html#your-turn-2"><i class="fa fa-check"></i><b>4.3</b> Your Turn</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="wrap-up.html"><a href="wrap-up.html"><i class="fa fa-check"></i><b>5</b> Wrap Up</a><ul>
-<li class="chapter" data-level="5.1" data-path="wrap-up.html"><a href="wrap-up.html#learning-more"><i class="fa fa-check"></i><b>5.1</b> Learning more</a></li>
-<li class="chapter" data-level="5.2" data-path="wrap-up.html"><a href="wrap-up.html#references"><i class="fa fa-check"></i><b>5.2</b> References</a></li>
+<li class="chapter" data-level="5" data-path="projections-and-adding-map-elements.html"><a href="projections-and-adding-map-elements.html"><i class="fa fa-check"></i><b>5</b> Projections and Adding Map Elements</a><ul>
+<li class="chapter" data-level="5.1" data-path="projections-and-adding-map-elements.html"><a href="projections-and-adding-map-elements.html#introduction-4"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="projections-and-adding-map-elements.html"><a href="projections-and-adding-map-elements.html#exercises-4"><i class="fa fa-check"></i><b>5.2</b> Exercises</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="projections-and-adding-map-elements.html"><a href="projections-and-adding-map-elements.html#re-project-data"><i class="fa fa-check"></i><b>5.2.1</b> Re-project Data</a></li>
+<li class="chapter" data-level="5.2.2" data-path="projections-and-adding-map-elements.html"><a href="projections-and-adding-map-elements.html#adding-north-arrows-and-scale-bars"><i class="fa fa-check"></i><b>5.2.2</b> Adding North Arrows and Scale Bars</a></li>
+<li class="chapter" data-level="5.2.3" data-path="projections-and-adding-map-elements.html"><a href="projections-and-adding-map-elements.html#adding-a-descriptive-title-and-data-source"><i class="fa fa-check"></i><b>5.2.3</b> Adding a Descriptive Title and Data Source</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="projections-and-adding-map-elements.html"><a href="projections-and-adding-map-elements.html#your-turn-3"><i class="fa fa-check"></i><b>5.3</b> Your Turn</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="wrap-up.html"><a href="wrap-up.html"><i class="fa fa-check"></i><b>6</b> Wrap Up</a><ul>
+<li class="chapter" data-level="6.1" data-path="wrap-up.html"><a href="wrap-up.html#learning-more"><i class="fa fa-check"></i><b>6.1</b> Learning more</a></li>
+<li class="chapter" data-level="6.2" data-path="wrap-up.html"><a href="wrap-up.html#references"><i class="fa fa-check"></i><b>6.2</b> References</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/adamhsparks/ggplot2_mapping" target="blank">Published with bookdown</a></li>
@@ -191,7 +200,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An Easy Introduction to Mapping in R with ggplot2</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Gentle Introduction to Mapping in R with ggplot2</a>
           </h1>
         </div>
 
@@ -211,14 +220,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">1.2</span> Spatial Packages</h2>
 <p>Spatial data has its own unique properties. Packages that are commonly used with spatial data in R include.</p>
 <ul>
-<li><a href="https://cran.r-project.org/web/packages/raster/index.html"><em>raster</em></a> <span class="citation">(Hijmans <a href="#ref-raster" role="doc-biblioref">2019</a>)</span>,</li>
-<li><a href="https://cran.r-project.org/web/packages/raster/index.html"><em>sf</em></a> <span class="citation">(Pebesma <a href="#ref-sf" role="doc-biblioref">2018</a>)</span>,</li>
-<li><a href="https://cran.r-project.org/web/packages/rnaturalearth/README.html"><em>rnaturalearth</em></a> <span class="citation">(South <a href="#ref-rnaturalearth" role="doc-biblioref">2017</a>)</span>, and</li>
-<li><a href="https://cran.r-project.org/web/packages/rnaturalearthdata/index.html"><em>rnaturalearthdata</em></a></li>
+<li><a href="https://CRAN.R-project.org/package=raster"><em>raster</em></a> <span class="citation">(Hijmans <a href="#ref-raster" role="doc-biblioref">2019</a>)</span>,</li>
+<li><a href="https://CRAN.R-project.org/package=raster"><em>sf</em></a> <span class="citation">(Pebesma <a href="#ref-sf" role="doc-biblioref">2018</a>)</span>,</li>
+<li><a href="https://CRAN.R-project.org/package=rnaturalearth"><em>rnaturalearth</em></a> <span class="citation">(South <a href="#ref-rnaturalearth" role="doc-biblioref">2017</a>)</span>,</li>
+<li><a href="https://CRAN.R-project.org/package=rnaturalearthdata"><em>rnaturalearthdata</em></a>,</li>
+<li><a href="https://CRAN.R-project.org/package=ggspatial"><em>ggspatial</em></a> <span class="citation">(Dunnington <a href="#ref-ggspatial" role="doc-biblioref">2018</a>)</span>,</li>
+<li><em>grid</em> (this is a part of your base R installation) and</li>
+<li><a href="https://CRAN.R-project.org/package=gridExtra"><em>gridExtra</em></a>.</li>
 </ul>
 <p>The <em>raster</em> package is used to handle raster data files but also offers capabilities to download and import other data including country-level outlines (<a href="https://gadm.org/">GADM</a>), elevation (SRTM data) and bioclimatic variables from <a href="https://www.worldclim.org/">Worldclim</a>.</p>
 <p><em>sf</em> is used to handle vector-format files and <em>ggplot2</em> now offers <code>geom_sf()</code> for easy plotting of <em>sf</em> objects.</p>
 <p><em>rnaturalearth</em> and <em>rnaturalearthdata</em> facilitate mapping using data from <a href="http://www.naturalearthdata.com/">http://www.naturalearthdata.com/</a>.</p>
+<p><em>ggspatial</em> is used to add map elements such as scale bars and north arrows to <em>ggplot2</em> objects.</p>
+<p><em>grid</em> and <em>gridExtra</em> are used to add what are called “neatlines”, an outline around the map to contain all the elements of the map.</p>
 <p>You may also want to visit <a href="https://rspatial.org/">https://rspatial.org</a> for more packages, tutorials and information.</p>
 </div>
 <div id="exercises" class="section level2">
@@ -226,7 +240,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="install-spatial-packages" class="section level3">
 <h3><span class="header-section-number">1.3.1</span> Install Spatial Packages</h3>
 <p>Install the packages necessary for working with spatial data in R. <em>This will take a few moments to complete.</em></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="intro.html#cb3-1"></a><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;raster&quot;</span>, <span class="st">&quot;sf&quot;</span>, <span class="st">&quot;rnaturalearth&quot;</span>, <span class="st">&quot;rnaturalearthdata&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="intro.html#cb3-1"></a><span class="kw">install.packages</span>(<span class="kw">c</span>(</span>
+<span id="cb3-2"><a href="intro.html#cb3-2"></a>  <span class="st">&quot;raster&quot;</span>,</span>
+<span id="cb3-3"><a href="intro.html#cb3-3"></a>  <span class="st">&quot;sf&quot;</span>,</span>
+<span id="cb3-4"><a href="intro.html#cb3-4"></a>  <span class="st">&quot;rnaturalearth&quot;</span>,</span>
+<span id="cb3-5"><a href="intro.html#cb3-5"></a>  <span class="st">&quot;rnaturalearthdata&quot;</span>,</span>
+<span id="cb3-6"><a href="intro.html#cb3-6"></a>  <span class="st">&quot;ggspatial&quot;</span></span>
+<span id="cb3-7"><a href="intro.html#cb3-7"></a>))</span></code></pre></div>
 <p>Once the main packages are installed, the second step is to install the <em>rnaturalearthhires</em> package as well.</p>
 <p>Answer <code>1</code> to download and install the necessary data. Again, this will also take some time.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="intro.html#cb4-1"></a><span class="kw">library</span>(rnaturalearth)</span>
@@ -238,6 +258,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <h3>References</h3>
 <div id="refs" class="references">
+<div id="ref-ggspatial">
+<p>Dunnington, Dewey. 2018. <em>Ggspatial: Spatial Data Framework for Ggplot2</em>. <a href="https://CRAN.R-project.org/package=ggspatial">https://CRAN.R-project.org/package=ggspatial</a>.</p>
+</div>
 <div id="ref-raster">
 <p>Hijmans, Robert J. 2019. <em>Raster: Geographic Data Analysis and Modeling</em>. <a href="https://CRAN.R-project.org/package=raster">https://CRAN.R-project.org/package=raster</a>.</p>
 </div>
