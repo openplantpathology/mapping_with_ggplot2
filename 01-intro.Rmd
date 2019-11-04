@@ -4,7 +4,7 @@
 
 Spatial data comes in two basic forms, raster (gridded) and vector (points, lines and polygons).
 
-Raster data are often used to represent continuous variables, _e.g._ temperature, rainfall  or elevation. Whereas vector data are used to represent sampling locations, weather station locations (and data at that point), roads, state or national outlines or other regions that may be natural or manufactured.
+Raster data are often used to represent continuous variables, _e.g._ temperature, rainfall or elevation. Whereas vector data are used to represent sampling locations, weather station locations (and data at that point), roads, state or national outlines or other regions that may be natural or manufactured.
 
 Understanding how these data differ is important to being able to use them in maps in R.
 

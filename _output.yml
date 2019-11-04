@@ -3,7 +3,7 @@ bookdown::gitbook:
   config:
     toc:
       before: |
-        <li><a href="./">An Easy Introduction to Mapping in R with ggplot2</a></li>
+        <li><a href="./">A Gentle Introduction to Mapping in R with ggplot2</a></li>
       after: |
         <li><a href="https://github.com/adamhsparks/ggplot2_mapping" target="blank">Published with bookdown</a></li>
     download: ["pdf", "epub"]

@@ -57,7 +57,7 @@ To show more information about the soybean rust outbreaks, we can use colours in
 ggplot() +
   geom_sf(data = rgs_pa, fill = "white") +
   geom_point(data = sbr, aes(x = lon, y = lat, colour = month)) +
-  scale_color_viridis_d("First\nReport") +
+  scale_color_viridis_d("Report") +
   xlab("Longitude") +
   ylab("Latitude") +
   theme_bw()
@@ -79,30 +79,24 @@ With the new data format, now plot the data.
 ggplot() +
   geom_sf(data = rgs_pa, fill = "white") +
   geom_point(data = sbr, aes(x = lon, y = lat, colour = month)) +
-  scale_color_viridis_d("First\nReport") +
+  scale_color_viridis_d("Report") +
   xlab("Longitude") +
   ylab("Latitude") +
   theme_bw()
 ```
 
-Now plotting the data again shows that the months are in the proper order but there are multiple years.
+Now plotting the data again shows that the months are in the proper order but there are multiple seasons.
 We can use faceting to make the maps more clear and see patterns.
 
 ```{r plot-sbr-states5, message=FALSE}
-library(lubridate)
-
-sbr <- 
-  sbr %>% 
-  mutate(year = year(date_report))
-
 ggplot() +
   geom_sf(data = rgs_pa, fill = "white") +
   geom_point(data = sbr, aes(x = lon, y = lat, colour = month)) +
-  scale_color_viridis_d("First\nReport") +
+  scale_color_viridis_d("Report") +
   xlab("Longitude") +
   ylab("Latitude") +
   theme_bw() +
-  facet_wrap(. ~ year)
+  facet_wrap(. ~ season)
 ```
 
 ## Your Turn {.exercise}

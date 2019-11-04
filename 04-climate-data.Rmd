@@ -7,9 +7,9 @@
 ### Download Climate Data from Worldclim
 
 _raster_ has functionality built-in to download files and import them automatically to your R session for you.
-We will use this functionality to get Worldclim data for minimum temperature.
+We will use this functionality to get Worldclim data [@worldclim] for minimum temperature.
 
-```{r wc-download, warning=FALSE, message=FALSE}
+```{r wc-download, eval=TRUE}
 library(raster)
 
 tmin <- getData("worldclim", var = "tmin", res = 10)
@@ -123,7 +123,3 @@ br_tmin <-
 ## Your Turn {.exercise}
 
 * Create a map of Minas Gerais' minimum temperature for December.
-
-```{r cleanup, include=FALSE, echo=FALSE}
-unlink("wc10", recursive = TRUE)
-```
