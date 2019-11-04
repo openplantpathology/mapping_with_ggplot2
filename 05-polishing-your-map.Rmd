@@ -1,4 +1,4 @@
-# Projections and Adding Map Elements
+# Polishing Your Map for Publication
 
 ## Introduction
 
@@ -22,7 +22,10 @@ Then we will add elements to complete our map including the north arrow, scale b
 
 ### Re-project Data
 
-Check the current projections of the data.
+There are several types of map projection depending on the scale (_e.g._ global, continent, national, state).
+Continental and national scale projections often depend on the location on the globe to help inform the choice of projection to use.
+
+First, we check the current projections of the data.
 
 ```{r re-project}
 library(sf)
@@ -30,7 +33,7 @@ st_crs(br_sf)
 ```
 
 To reproject the data we will provide the definition for SIRGAS 2000.
-The information for the `proj4text` comes from <https://epsg.io/4674> which has information for several different map projections.
+The information for the `proj4text` comes from <https://epsg.io/4674>, which has information for several different map projections.
 
 ```{r sirgas-2000}
 br_sf <- st_transform(br_sf, 4674)
@@ -92,7 +95,7 @@ br_tmin +
 ```
 
 It is always a good idea to credit the sources of the map data, especially if it is not your own.
-`labs()` has options for subtitles, which can be useful, but also a `caption` argument, which is useful for adding data attributions to your map.
+The `labs()` has options for subtitles, which can be useful, but also a `caption` argument, which is useful for adding data attributions to your map.
 
 ```{r data-attribution, warning=FALSE, message=FALSE}
 br_tmin <-

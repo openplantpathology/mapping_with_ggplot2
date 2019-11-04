@@ -19,7 +19,7 @@ sbr <- read_csv("SBR-BR.csv")
 glimpse(sbr)
 ```
 
-### Add Soybean Rust Observations to `br` ggplot2 Object
+### Add Soybean Rust Observations to Our ggplot2 Object
 
 Using `geom_point()` we can add points from the CSV file of observation data to the map of Brazil that we have already created.
 
@@ -71,9 +71,9 @@ sbr <-
   sbr %>%
   mutate(month = as_factor(month)) %>%
   mutate(month = fct_relevel(month, c("Nov", "Dec", "Jan", "Feb", "Mar")))
-
 ```
 
+With the new data format, now plot the data.
 
 ```{r plot-sbr-states4}
 ggplot() +
