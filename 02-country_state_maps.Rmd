@@ -86,7 +86,7 @@ We see that a column named "name_pt" exists, with the Portuguese name spelling f
 
 We can use this to `filter()` the data so that it only represents Minas Gerais and we can use that to make a map.
 
-For more on subsetting _sf_ objects, see: <https://cran.rstudio.com/web/packages/sf/vignettes/sf4.html>
+For more on subsetting _sf_ objects, see: <https://cran.rstudio.com/web/packages/sf/vignettes/sf4.html>.
 
 #### Filter Minas Gerais
 
@@ -132,4 +132,5 @@ ggplot(data = br_sf) +
 
 ## Your Turn {.exercise}
 
-Using the examples above, download and create a map of Australia. Then highlight Queensland.
+Using the examples above, download and create a map of Australia.
+Then highlight Bahia.
