@@ -10,10 +10,10 @@ Understanding how these data differ is important to being able to use them in ma
 
 ## Spatial Packages
 
-Spatial data has its own unique properties. Packages that are commonly used with spatial data in R include.
+Spatial data has its own unique properties. Packages that are commonly used with spatial data in R include
 
 * [_raster_](https://CRAN.R-project.org/package=raster) [@raster], 
-* [_sf_](https://CRAN.R-project.org/package=raster) [@sf], 
+* [_sf_](https://CRAN.R-project.org/package=sf) [@sf], 
 * [_rnaturalearth_](https://CRAN.R-project.org/package=rnaturalearth) [@rnaturalearth],
 * [_rnaturalearthdata_](https://CRAN.R-project.org/package=rnaturalearthdata),
 * [_ggspatial_](https://CRAN.R-project.org/package=ggspatial) [@ggspatial],
